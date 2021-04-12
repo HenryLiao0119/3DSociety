@@ -1,4 +1,4 @@
-import React, { Fragments } from 'react';
+import React, { Fragment } from 'react';
 
 // bootstrap
 import { Container } from 'react-bootstrap';
@@ -21,7 +21,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragments>
+        <Fragment>
           <Header />
           <main className='py-3'>
             <Container>
@@ -29,7 +29,7 @@ const App = () => {
             </Container>
           </main>
           <Footer />
-        </Fragments>
+        </Fragment>
       </Router>
     </Provider>
   );
