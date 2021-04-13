@@ -29,10 +29,6 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    brand: {
-      type: String,
-      required: true,
-    },
     category: {
       type: String,
       required: true,
@@ -56,7 +52,12 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    price: {
+    priceFile: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    priceProduct: {
       type: Number,
       required: true,
       default: 0,
