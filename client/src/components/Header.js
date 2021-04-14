@@ -25,7 +25,9 @@ const Header = () => {
     // dispatch(logout());
   };
 
-  const userInfo = {};
+  const userInfo = {
+    name: 'henry',
+  };
 
   return (
     <header>
@@ -45,7 +47,7 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown title='henry' id='username'>
+                <NavDropdown title={userInfo.name} id='username'>
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
