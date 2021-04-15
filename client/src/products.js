@@ -1,5 +1,6 @@
 const products = [
   {
+    _id: '1',
     name: '3DBenchy',
     image: '/images/3dbenchy.JPG',
     description:
@@ -12,6 +13,7 @@ const products = [
     numReviews: 12,
   },
   {
+    _id: '2',
     name: 'All in One 3D Printer test',
     image: '/images/3dprintertest.JPG',
     description:
@@ -24,6 +26,7 @@ const products = [
     numReviews: 8,
   },
   {
+    _id: '3',
     name: 'Baby Groot',
     image: '/images/babygroot.jpg',
     description:
@@ -36,6 +39,7 @@ const products = [
     numReviews: 12,
   },
   {
+    _id: '4',
     name: 'Wireframe Skull Pencil Holder',
     image: '/images/wireframeskull.jpg',
     description: 'Wireframe skull shape pencil holder ',
@@ -47,6 +51,7 @@ const products = [
     numReviews: 12,
   },
   {
+    _id: '5',
     name: 'Save pangolins',
     image: '/images/pangolins.jpg',
     description:
@@ -59,6 +64,7 @@ const products = [
     numReviews: 10,
   },
   {
+    _id: '6',
     name: 'XYZ 20mm Calibration Cube',
     image: '/images/xyzcubetest.jpg',
     description:
