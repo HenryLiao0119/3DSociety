@@ -3,6 +3,7 @@ import color from 'colors';
 
 // import for database
 import connectDB from './config/db.js';
+import products from './data/products.js';
 
 // import for enviroment variables
 import dotenv from 'dotenv';
@@ -24,6 +25,15 @@ app.use(express.json());
 // send to port with the message
 app.get('/', (req, res) => {
   res.send('API is running...');
+});
+
+// Routes
+app.get('/api/products', (req, res) => {
+  res.json(products);
+});
+app.get('/api/products/:id', (req, res) => {
+  const product = products.find((p) => p._id == req.params.id);
+  res.json(product);
 });
 
 // set port
