@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 // components
 import Product from '../components/Product';
@@ -15,7 +15,8 @@ import { Row, Col } from 'react-bootstrap';
 // import { listProducts } from '../actions/productAction';
 
 // test products
-import products from '../products';
+// import products from '../products';
+import axios from 'axios';
 
 const HomeScreen = ({ match }) => {
   // const keyword = match.params.keyword;
@@ -25,10 +26,17 @@ const HomeScreen = ({ match }) => {
 
   // const productList = useSelector((state) => state.productList);
   // const { products, loading, error, page, pages } = productList;
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   dispatch(listProducts(keyword, pageNumber));
-  // }, [dispatch, keyword, pageNumber]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get('/api/products');
+
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <Fragment>
