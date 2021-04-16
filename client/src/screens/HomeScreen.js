@@ -15,7 +15,6 @@ import { Row, Col } from 'react-bootstrap';
 // import { listProducts } from '../actions/productAction';
 
 // test products
-// import products from '../products';
 import axios from 'axios';
 
 const HomeScreen = ({ match }) => {

@@ -32,15 +32,14 @@ import Message from '../components/Message';
 // import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productTypes';
 
 // import test products
-import products from '../products';
+import axios from 'axios';
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
   const [type, setType] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState([]);
 
   // const dispatch = useDispatch();
 
@@ -65,6 +64,16 @@ const ProductScreen = ({ match, history }) => {
   //   // }
   //   // dispatch(getSingleProduct(match.params.id));
   // }, [dispatch, match, successProductReview]);
+
+  useEffect(() => {
+    const getSingleProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    getSingleProduct();
+  }, []);
 
   const addToCartHandler = () => {
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
