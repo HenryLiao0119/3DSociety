@@ -8,6 +8,12 @@ import products from './data/products.js';
 // import for enviroment variables
 import dotenv from 'dotenv';
 
+// import for routes
+import productRoutes from './routes/productRoutes.js';
+
+// import for middleware
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+
 // ------------------------------------------------------
 
 //set up enviroment files
@@ -28,13 +34,9 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.get('/api/products', (req, res) => {
-  res.json(products);
-});
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find((p) => p._id == req.params.id);
-  res.json(product);
-});
+app.use('/api/products', productRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 // set port
 const PORT = process.env.PORT || 5000;

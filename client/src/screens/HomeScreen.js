@@ -14,9 +14,6 @@ import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productAction';
 
-// test products
-import axios from 'axios';
-
 const HomeScreen = ({ match }) => {
   // const keyword = match.params.keyword;
   // const pageNumber = match.params.pageNumber || 1;
