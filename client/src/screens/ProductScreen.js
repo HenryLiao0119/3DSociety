@@ -15,13 +15,13 @@ import {
 import { Link } from 'react-router-dom';
 
 // redux import
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // action imports
-// import {
-//   getSingleProduct,
-//   createProductReview,
-// } from '../actions/productAction';
+import {
+  getSingleProduct,
+  //createProductReview,
+} from '../actions/productAction';
 
 // components imports
 import Rating from '../components/Rating';
@@ -41,10 +41,10 @@ const ProductScreen = ({ match, history }) => {
   const [comment, setComment] = useState('');
   const [product, setProduct] = useState([]);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const productDetails = useSelector((state) => state.productDetails);
-  // const { product, error, loading } = productDetails;
+  const productDetails = useSelector((state) => state.productDetails);
+  const { product, error, loading } = productDetails;
 
   // const userLogin = useSelector((state) => state.userLogin);
   // const { userInfo } = userLogin;
@@ -66,14 +66,8 @@ const ProductScreen = ({ match, history }) => {
   // }, [dispatch, match, successProductReview]);
 
   useEffect(() => {
-    const getSingleProduct = async () => {
-      const { data } = await axios.get(`/api/products/${match.params.id}`);
-
-      setProduct(data);
-    };
-
-    getSingleProduct();
-  }, []);
+    dispatch(getSingleProduct());
+  }, [dispatch]);
 
   const addToCartHandler = () => {
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
