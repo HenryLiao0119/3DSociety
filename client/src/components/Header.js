@@ -7,25 +7,25 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 
 // redux
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // actions
-// import { logout } from '../actions/userAction';
+import { logout } from '../actions/userActions';
 
 //components
 import SearchBar from '../components/SearchBar';
 
 const Header = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.users);
+  const { userCurrent } = userLogin;
 
   const logoutHandler = () => {
-    // dispatch(logout());
+    dispatch(logout());
   };
 
-  const userInfo = false;
+  console.log(userCurrent);
 
   return (
     <header>
@@ -44,8 +44,8 @@ const Header = () => {
                   <i className='fas fa-shopping-cart'></i> Cart
                 </Nav.Link>
               </LinkContainer>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
+              {userCurrent ? (
+                <NavDropdown title={userCurrent.name} id='username'>
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -60,7 +60,7 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              {userInfo && userInfo.isAdmin && (
+              {userCurrent && userCurrent.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
