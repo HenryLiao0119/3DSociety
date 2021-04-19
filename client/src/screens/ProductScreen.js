@@ -64,13 +64,12 @@ const ProductScreen = ({ match, history }) => {
   //   // dispatch(getSingleProduct(match.params.id));
   // }, [dispatch, match, successProductReview]);
 
-  console.log(match.params.id);
   useEffect(() => {
     dispatch(getSingleProduct(match.params.id));
   }, [dispatch, match]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?qty?${qty}?type?${type}`);
   };
 
   const submitHandler = (e) => {

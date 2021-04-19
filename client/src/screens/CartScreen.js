@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 //redux import
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // bootstrap import
 import { Link } from 'react-router-dom';
@@ -16,35 +16,34 @@ import {
 } from 'react-bootstrap';
 
 // action imports
-// import { addToCart, removeFromCart } from '../actions/cartAction';
+import { addToCart, removeFromCart } from '../actions/cartAction';
 
 // component imports
 import Message from '../components/Message';
 
 const CartScreen = ({ match, location, history }) => {
+  // pulling data from params
   const productId = match.params.id;
+  const qty = location.search ? Number(location.search.split('?')[2]) : 1;
+  const type = location.search ? String(location.search.split('?')[4]) : 1;
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
-  // const cart = useSelector((state) => state.cart);
-  // const { cartItems } = cart;
-
-  // useEffect(() => {
-  //   if (productId) {
-  //     dispatch(addToCart(productId, qty));
-  //   }
-  // }, [dispatch, productId, qty]);
+  useEffect(() => {
+    if (productId) {
+      dispatch(addToCart(productId, qty, type));
+    }
+  }, [dispatch, productId, qty, type]);
 
   const removeFromCartHandler = (id) => {
-    // dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id));
   };
   const checkoutHandler = () => {
     // history.push('/login?redirect=shipping');
   };
-
-  const cartItems = {};
 
   return (
     <Row>
@@ -71,18 +70,26 @@ const CartScreen = ({ match, location, history }) => {
                       as='select'
                       style={{ width: 'unset' }}
                       value={item.qty}
-                      onChange={
-                        (e) => {}
-                        // dispatch(
-                        //   addToCart(item.product, Number(e.target.value))
-                        // )
+                      onChange={(e) =>
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
                       }
                     >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
+                      {' '}
+                      {item.type === 'file' ? (
+                        <option key='0' value='0'>
+                          0
                         </option>
-                      ))}
+                      ) : (
+                        <Fragment>
+                          {[...Array(item.productionAmount).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Fragment>
+                      )}
                     </Form.Control>
                   </Col>
                   <Col md={2}>

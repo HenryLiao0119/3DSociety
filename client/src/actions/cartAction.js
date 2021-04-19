@@ -1,0 +1,48 @@
+import axios from 'axios';
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_PAYMENT_METHOD,
+  CART_SAVE_SHIPPING_ADDRESS,
+} from '../constants/cartTypes';
+
+// add to cart
+export const addToCart = (id, qty, type) => async (dispatch, getState) => {
+  // grab data
+  const { data } = await axios.get(`/api/products/${id}`);
+
+  const price = type === 'file' ? data.priceFile : data.priceProduct;
+
+  // send data
+  dispatch({
+    type: CART_ADD_ITEM,
+    payload: {
+      product: data._id,
+      name: data.name,
+      image: data.image,
+      price: price,
+      productionAmount: data.productionAmount,
+      qty,
+      type,
+    },
+  });
+
+  // save in localStorage
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+// remove cart item
+export const removeFromCart = (id) => async (dispatch, getState) => {
+  // send data
+  dispatch({
+    type: CART_REMOVE_ITEM,
+    payload: id,
+  });
+
+  // update localstorage
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+// save shipping address
+
+// save payment
