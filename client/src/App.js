@@ -13,6 +13,7 @@ import store from './store';
 // Screens
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 // components
 import Header from './components/Header';
@@ -28,6 +29,7 @@ const App = () => {
             <Container>
               <Route path='/' component={HomeScreen} exact />
               <Route path='/product/:id' component={ProductScreen} />
+              <Route path='/cart' component={CartScreen} />
             </Container>
           </main>
           <Footer />

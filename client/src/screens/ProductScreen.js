@@ -35,7 +35,7 @@ import Message from '../components/Message';
 import axios from 'axios';
 
 const ProductScreen = ({ match, history }) => {
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(0);
   const [type, setType] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -70,7 +70,7 @@ const ProductScreen = ({ match, history }) => {
   }, [dispatch, match]);
 
   const addToCartHandler = () => {
-    // history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   const submitHandler = (e) => {
