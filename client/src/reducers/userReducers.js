@@ -51,6 +51,18 @@ export default (state = initialState, action) => {
     case USER_LOGOUT:
       return { users: null, userCurrent: null, error: null };
     // reg. user
+    case USER_REGISTER_REQUEST:
+      return { loading: true };
+    case USER_REGISTER_SUCCESS:
+      return {
+        userCurrent: action.payload,
+        loading: false,
+      };
+    case USER_REGISTER_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
 
     // get user detail
 
