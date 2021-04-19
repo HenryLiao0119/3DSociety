@@ -62,6 +62,10 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    productionAmount: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

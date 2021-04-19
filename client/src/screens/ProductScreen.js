@@ -39,11 +39,10 @@ const ProductScreen = ({ match, history }) => {
   const [type, setType] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [product, setProduct] = useState([]);
 
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.productDetails);
+  const productDetails = useSelector((state) => state.products);
   const { product, error, loading } = productDetails;
 
   // const userLogin = useSelector((state) => state.userLogin);
@@ -65,9 +64,10 @@ const ProductScreen = ({ match, history }) => {
   //   // dispatch(getSingleProduct(match.params.id));
   // }, [dispatch, match, successProductReview]);
 
+  console.log(match.params.id);
   useEffect(() => {
-    dispatch(getSingleProduct());
-  }, [dispatch]);
+    dispatch(getSingleProduct(match.params.id));
+  }, [dispatch, match]);
 
   const addToCartHandler = () => {
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -108,7 +108,10 @@ const ProductScreen = ({ match, history }) => {
               </ListGroup.Item>
               <ListGroup.Item>File Price: ${product.priceFile}</ListGroup.Item>
               <ListGroup.Item>
-                Product Price: ${product.priceProduct}
+                Product Price:{' '}
+                {product.priceProduct === 0
+                  ? 'Not For Sale'
+                  : '$ ' + product.priceProduct}
               </ListGroup.Item>
               <ListGroup.Item>
                 Description: {product.description}
@@ -128,9 +131,18 @@ const ProductScreen = ({ match, history }) => {
                         value={type}
                         onChange={(e) => setType(e.target.value)}
                       >
-                        <option value=''></option>
-                        <option value='file'>File</option>
-                        <option value='product'>Product</option>
+                        {product.priceProduct === 0 ? (
+                          <Fragment>
+                            <option value=''></option>
+                            <option value='file'>File</option>
+                          </Fragment>
+                        ) : (
+                          <Fragment>
+                            <option value=''></option>
+                            <option value='file'>File</option>
+                            <option value='product'>Product</option>
+                          </Fragment>
+                        )}
                       </Form.Control>
                     </Col>
                   </Row>
@@ -141,6 +153,8 @@ const ProductScreen = ({ match, history }) => {
                     <Col>
                       {type === 'file'
                         ? '$ ' + product.priceFile
+                        : product.priceProduct === 0
+                        ? 'Not for Sale'
                         : '$ ' + product.priceProduct}
                     </Col>
                   </Row>
@@ -157,12 +171,19 @@ const ProductScreen = ({ match, history }) => {
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
-                          <option value=''></option>
-                          <option value='1'>1</option>
-                          <option value='2'>2</option>
-                          <option value='3'>3</option>
-                          <option value='4'>4</option>
-                          <option value='5'>5</option>
+                          {product.productionAmount === 0 ? (
+                            <option key={0} value={0}>
+                              0
+                            </option>
+                          ) : (
+                            [...Array(product.productionAmount).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )
+                          )}
                         </Form.Control>
                       </Col>
                     </Row>
@@ -180,6 +201,7 @@ const ProductScreen = ({ match, history }) => {
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
+                          c
                           {[...Array(product.countInStock).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
                               {x + 1}

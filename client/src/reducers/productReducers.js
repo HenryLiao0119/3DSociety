@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
@@ -10,12 +9,13 @@ import {
 
 const initialState = {
   products: [],
+  product: [],
   error: null,
 };
 
-// product list
-export const productListReducers = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
+    // get list
     case PRODUCT_LIST_REQUEST:
       return { ...state, loading: true };
     case PRODUCT_LIST_SUCCESS:
@@ -30,14 +30,7 @@ export const productListReducers = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    default:
-      return state;
-  }
-};
-
-// product detail
-export const productDetailReducers = (state = initialState, action) => {
-  switch (action.type) {
+    // get single product
     case PRODUCT_DETAILS_REQUEST:
       return { ...state, loading: true };
     case PRODUCT_DETAILS_SUCCESS:
@@ -51,13 +44,12 @@ export const productDetailReducers = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    // delete product
+
+    // create product
+
+    // update productc
     default:
       return state;
   }
 };
-
-// delete product
-
-// create product
-
-// update productc

@@ -20,7 +20,7 @@ const HomeScreen = ({ match }) => {
 
   // redux
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
+  const productList = useSelector((state) => state.products);
   const { products, loading, error } = productList;
 
   useEffect(() => {
