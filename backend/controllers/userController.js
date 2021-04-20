@@ -90,8 +90,10 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route  PUT /api/users/profile
 //@access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
+  // get user by id
   const user = await User.findById(req.user._id);
 
+  // if user exist, change the info by the new info or stay the same
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
@@ -99,8 +101,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password || user.password;
     }
 
+    //save updated user
     const updateUser = await user.save();
 
+    // return updated user info with new token
     res.json({
       _id: updateUser._id,
       name: updateUser.name,
