@@ -34,6 +34,7 @@ const App = () => {
               <Route path='/cart/:id?' component={CartScreen} />
               <Route path='/login' component={LoginScreen} />
               <Route path='/register' component={RegisterScreen} />
+              <Route path='/profile' component={RegisterScreen} />
             </Container>
           </main>
           <Footer />
