@@ -12,7 +12,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 // action import
-// import { getUserDetails, updateUserProfile } from '../actions/userAction';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 // import { listMyOrders } from '../actions/orderAction';
 // // import { USER_UPDATE_PROFILE_RESET } from '../constants/userTypes';
 
@@ -23,13 +23,10 @@ const ProfileScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const userDetails = useSelector((state) => state.userDetails);
-  // const { loading, error, user } = userDetails;
-
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+  const userDetails = useSelector((state) => state.users);
+  const { loading, error, success, userCurrent } = userDetails;
 
   // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   // const { success } = userUpdateProfile;
@@ -37,38 +34,34 @@ const ProfileScreen = ({ location, history }) => {
   // const orderListMy = useSelector((state) => state.orderListMy);
   // const { orders, loading: loadingOrders, error: errorOrders } = orderListMy;
 
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     history.push('/login');
-  //   } else {
-  //     dispatch(listMyOrders());
-  //     if (!user.name) {
-  //       dispatch(getUserDetails('profile'));
-  //       dispatch(listMyOrders());
-  //     } else {
-  //       setName(user.name);
-  //       setEmail(user.email);
-  //     }
-  //   }
-  // }, [dispatch, history, userInfo, user]);
+  useEffect(() => {
+    if (!userCurrent) {
+      history.push('/login');
+    } else {
+      setName(userCurrent.name);
+      setEmail(userCurrent.email);
+    }
+  }, [dispatch, history, userCurrent]);
 
   const submitHandler = (e) => {
-    // e.preventDefault();
-    // if (password !== confirmPassword) {
-    //   setMessage('Passwords do not match');
-    // } else {
-    //   dispatch(updateUserProfile({ id: user._id, name, email, password }));
-    // }
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+    } else {
+      dispatch(
+        updateUserProfile({ id: userCurrent._id, name, email, password })
+      );
+    }
   };
 
   return (
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
-        {/* {message && <Message variant='danger'>{message}</Message>}
+        {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />} */}
+        {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group ControlId='name'>
             <Form.Label>Name</Form.Label>

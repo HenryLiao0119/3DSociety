@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     // login user
     case USER_LOGIN_REQUEST:
-      return { loading: true };
+      return { ...state, loading: true };
     case USER_LOGIN_SUCCESS:
       return {
         userCurrent: action.payload,
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
       return { users: null, userCurrent: null, error: null };
     // reg. user
     case USER_REGISTER_REQUEST:
-      return { loading: true };
+      return { ...state, loading: true };
     case USER_REGISTER_SUCCESS:
       return {
         userCurrent: action.payload,
@@ -63,11 +63,39 @@ export default (state = initialState, action) => {
         error: action.payload,
         loading: false,
       };
-
     // get user detail
-
+    // case USER_DETAILS_REQUEST:
+    //   return { ...state, loading: true };
+    // case USER_DETAILS_SUCCESS:
+    //   return {
+    //     userCurrent: action.payload,
+    //     loading: false,
+    //   };
+    // case USER_DETAILS_FAIL:
+    //   return {
+    //     error: action.payload,
+    //     loading: false,
+    //   };
+    // case USER_DETAILS_RESET:
+    //   return {
+    //     userCurrent: {},
+    //   };
     // update users
-
+    case USER_UPDATE_PROFILE_REQUEST:
+      return { ...state, loading: true };
+    case USER_UPDATE_PROFILE_SUCCESS:
+      return {
+        userCurrent: action.payload,
+        loading: false,
+        success: true,
+      };
+    case USER_UPDATE_PROFILE_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    case USER_UPDATE_PROFILE_RESET:
+      return {};
     // grab all users
 
     // delete user
