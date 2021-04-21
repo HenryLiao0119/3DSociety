@@ -16,7 +16,7 @@ const PlaceOrderScreen = ({ history }) => {
     0
   );
 
-  cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 100;
+  cart.shippingPrice = cart.itemsPrice > 25 ? 0 : 10;
   cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
   cart.totalPrice = Number(
     (cart.itemsPrice + cart.shippingPrice + cart.taxPrice).toFixed(2)
@@ -149,9 +149,9 @@ const PlaceOrderScreen = ({ history }) => {
                   </Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
-                {/* {error && <Message variant='danger'>{error}</Message>} */}
-              </ListGroup.Item>
+              {/* <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
+              </ListGroup.Item> */}
               <ListGroup.Item>
                 <Button
                   type='button'

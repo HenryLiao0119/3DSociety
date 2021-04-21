@@ -12,7 +12,7 @@ import { Row, Col } from 'react-bootstrap';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../actions/productAction';
+import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
   // const keyword = match.params.keyword;

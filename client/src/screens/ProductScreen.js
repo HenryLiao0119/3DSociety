@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getSingleProduct,
   //createProductReview,
-} from '../actions/productAction';
+} from '../actions/productActions';
 
 // components imports
 import Rating from '../components/Rating';

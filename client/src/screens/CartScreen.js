@@ -16,7 +16,7 @@ import {
 } from 'react-bootstrap';
 
 // action imports
-import { addToCart, removeFromCart } from '../actions/cartAction';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 // component imports
 import Message from '../components/Message';
