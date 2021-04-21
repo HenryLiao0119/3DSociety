@@ -14,12 +14,12 @@ const ShippingScreen = ({ history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.Country);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
-    // e.preventDefault();
-    // dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    // history.push('/payment');
+    e.preventDefault();
+    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    history.push('/payment');
   };
 
   return (

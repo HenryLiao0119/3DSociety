@@ -39,6 +39,11 @@ export default (state = initialState, action) => {
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
     // save shipping address
+    case CART_SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: action.payload,
+      };
     // save payment method
     default:
       return state;
