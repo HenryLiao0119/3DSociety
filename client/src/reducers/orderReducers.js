@@ -47,6 +47,18 @@ export default (state = initialState, action) => {
         error: action.payload,
       };
     // get order detail
+    case ORDER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case ORDER_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        order: action.payload,
+      };
+    case ORDER_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
     // pay order
     // get order list
     // deliver orders
