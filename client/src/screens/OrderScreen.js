@@ -14,10 +14,7 @@ import {
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderTypes';
 
 const OrderScreen = ({ match, history }) => {
-  console.log(1);
   const orderId = match.params.id;
-  console.log(orderId);
-  console.log(2);
 
   const [sdkReady, setSdkReady] = useState(false);
 
@@ -41,15 +38,16 @@ const OrderScreen = ({ match, history }) => {
     }
     const addPayPalScipt = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal');
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
+      // const script = document.createElement('script');
+      // script.type = 'text/javascript';
+      // script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      // script.async = true;
+      // script.onload = () => {
+      //   setSdkReady(true);
+      // };
+      // document.body.appendChild(script);
     };
+
     if (!order || successPaid || order._id !== orderId) {
       // dispatch({ type: ORDER_PAY_RESET });
       // dispatch({ type: ORDER_DELIVER_RESET });
@@ -62,8 +60,6 @@ const OrderScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, order, orderId, successPaid]);
-
-  console.log(sdkReady);
 
   // useEffect(() => {
   //   console.log(3);
@@ -213,7 +209,6 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
-                  {loading && <Loader />}
                   {!sdkReady ? (
                     <Loader />
                   ) : (

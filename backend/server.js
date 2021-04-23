@@ -3,7 +3,6 @@ import color from 'colors';
 
 // import for database
 import connectDB from './config/db.js';
-import products from './data/products.js';
 
 // import for enviroment variables
 import dotenv from 'dotenv';
