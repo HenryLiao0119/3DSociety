@@ -95,8 +95,7 @@ const OrderScreen = ({ match, history }) => {
   ) : (
     <Fragment>
       <h1>Order {order._id}</h1>
-      {/* {order.user.name} */}
-      {/* <Row>
+      <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
@@ -181,7 +180,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>Items:</Col>
                   <Col>
                     $
-                    {order.totalPrice
+                    {order.itemsPrice
                       .toFixed(2)
                       .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   </Col>
@@ -220,7 +219,7 @@ const OrderScreen = ({ match, history }) => {
                   </Col>
                 </Row>
               </ListGroup.Item>
-              {!order.isPaid && (
+              {/* {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
                   {!sdkReady ? (
@@ -247,11 +246,11 @@ const OrderScreen = ({ match, history }) => {
                       Mark as Delivered
                     </Button>
                   </ListGroup.Item>
-                )}
+                )} */}
             </ListGroup>
           </Card>
         </Col>
-      </Row> */}
+      </Row>
     </Fragment>
   );
 };
