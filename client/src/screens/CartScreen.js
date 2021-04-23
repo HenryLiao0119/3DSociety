@@ -78,8 +78,8 @@ const CartScreen = ({ match, location, history }) => {
                     >
                       {' '}
                       {item.type === 'file' ? (
-                        <option key='0' value='0'>
-                          0
+                        <option key='1' value='1'>
+                          1
                         </option>
                       ) : (
                         <Fragment>

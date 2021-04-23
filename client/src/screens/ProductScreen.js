@@ -32,7 +32,7 @@ import Rating from '../components/Rating';
 // import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productTypes';
 
 const ProductScreen = ({ match, history }) => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const [type, setType] = useState('');
   // const [rating, setRating] = useState(0);
   // const [comment, setComment] = useState('');
