@@ -28,6 +28,7 @@ const initialState = {
   orderlist: [],
   error: null,
   success: null,
+  loading: true,
 };
 
 export default (state = initialState, action) => {
