@@ -25,25 +25,26 @@ import {
 
 // components imports
 import Rating from '../components/Rating';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+// import Loader from '../components/Loader';
+// import Message from '../components/Message';
 
 // type imports
 // import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productTypes';
 
-// import test products
-import axios from 'axios';
-
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(0);
   const [type, setType] = useState('');
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  // const [rating, setRating] = useState(0);
+  // const [comment, setComment] = useState('');
 
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.products);
-  const { product, error, loading } = productDetails;
+  const {
+    product,
+    // error,
+    // loading
+  } = productDetails;
 
   // const userLogin = useSelector((state) => state.userLogin);
   // const { userInfo } = userLogin;
@@ -72,17 +73,15 @@ const ProductScreen = ({ match, history }) => {
     history.push(`/cart/${match.params.id}?qty?${qty}?type?${type}`);
   };
 
-  const submitHandler = (e) => {
-    // e.preventDefault();
-    // dispatch(
-    //   createProductReview(match.params.id, {
-    //     rating,
-    //     comment,
-    //   })
-    // );
-  };
-
-  const userInfo = () => {};
+  // const submitHandler = (e) => {
+  //   // e.preventDefault();
+  //   // dispatch(
+  //   //   createProductReview(match.params.id, {
+  //   //     rating,
+  //   //     comment,
+  //   //   })
+  //   // );
+  // };
 
   return (
     <Fragment>
