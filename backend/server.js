@@ -33,18 +33,19 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
-
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
-app.use(notFound);
-app.use(errorHandler);
 
 // paypal route
-app.get('/api/config/paypal', (req, res) =>
-  res.send(process.env.PAYPAL_CLIENT_ID)
-);
+app.get('/api/config/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID);
+});
+
+// error route need to be at the end
+app.use(notFound);
+app.use(errorHandler);
 
 // set port
 const PORT = process.env.PORT || 5000;
