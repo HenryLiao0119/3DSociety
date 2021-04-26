@@ -3,6 +3,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
+  CART_CLEAR_ITEMS,
 } from '../constants/cartTypes';
 
 const initialState = {
@@ -49,6 +50,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         paymentMethod: action.payload,
+      };
+    case CART_CLEAR_ITEMS:
+      return {
+        cartItems: [],
+        shippingAddress: {},
+        paymentMethod: {},
       };
     default:
       return state;

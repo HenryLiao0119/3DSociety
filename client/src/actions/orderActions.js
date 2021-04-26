@@ -21,6 +21,8 @@ import {
   // ORDER_DELIVER_RESET,
   // ORDER_CREATE_RESET,
 } from '../constants/orderTypes';
+import { CART_CLEAR_ITEMS } from '../constants/cartTypes';
+import { logout } from './userActions';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -40,6 +42,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const { data } = await axios.post(`/api/orders/`, order, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
+    dispatch({
+      type: CART_CLEAR_ITEMS,
+      payload: data,
+    });
+    localStorage.removeItem('cartItems');
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
@@ -69,12 +76,16 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
     dispatch({
       type: ORDER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: message,
     });
   }
 };
