@@ -31,17 +31,23 @@ const ProfileScreen = ({ location, history }) => {
   // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   // const { success } = userUpdateProfile;
 
-  // const orderListMy = useSelector((state) => state.orderListMy);
-  // const { orders, loading: loadingOrders, error: errorOrders } = orderListMy;
+  const orderListMy = useSelector((state) => state.orders);
+  const { orders, loading, error } = orderListMy;
 
   useEffect(() => {
     if (!userCurrent) {
       history.push('/login');
     } else {
-      setName(userCurrent.name);
-      setEmail(userCurrent.email);
+      dispatch(listMyOrders());
+      if (!userCurrent.name) {
+        dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
+      } else {
+        setName(userCurrent.name);
+        setEmail(userCurrent.email);
+      }
     }
-  }, [dispatch, history, userCurrent]);
+  }, [dispatch, history, userCurrent, user]);
 
   const submitHandler = (e) => {
     e.preventDefault();

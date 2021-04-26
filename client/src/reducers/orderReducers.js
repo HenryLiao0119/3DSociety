@@ -26,11 +26,11 @@ import {
 const initialState = {
   order: [],
   orderlist: [],
-  error: null,
-  successCreated: false,
-  successPaid: false,
-  successDelivered: false,
-  loading: true,
+  orderError: null,
+  orderCreated: false,
+  orderPaid: false,
+  orderDelivered: false,
+  orderLoading: true,
 };
 
 export default (state = initialState, action) => {
@@ -39,36 +39,36 @@ export default (state = initialState, action) => {
     case ORDER_CREATE_SUCCESS:
       return {
         ...state,
-        loading: false,
-        successCreated: true,
+        orderLoading: false,
+        orderCreated: true,
         order: action.payload,
       };
     case ORDER_CREATE_FAIL:
       return {
-        loading: false,
-        error: action.payload,
+        orderLoading: false,
+        orderError: action.payload,
       };
     case ORDER_DETAILS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        orderLoading: false,
         order: action.payload,
       };
     case ORDER_DETAILS_FAIL:
       return {
-        loading: false,
-        error: action.payload,
+        orderLoading: false,
+        orderError: action.payload,
       };
     case ORDER_PAY_SUCCESS:
       return {
         ...state,
-        loading: false,
-        successPaid: true,
+        orderLoading: false,
+        orderPaid: true,
       };
     case ORDER_PAY_FAIL:
       return {
-        loading: false,
-        error: action.payload,
+        orderLoading: false,
+        orderError: action.payload,
       };
     // case ORDER_PAY_RESET:
     //   return {};
@@ -76,25 +76,25 @@ export default (state = initialState, action) => {
     case ORDER_LIST_MY_SUCCESS:
       return {
         ...state,
-        loading: false,
+        orderLoading: false,
         orders: action.payload,
       };
     case ORDER_LIST_MY_FAIL:
       return {
-        loading: false,
-        error: action.payload,
+        orderLoading: false,
+        orderError: action.payload,
       };
     // deliver orders
     case ORDER_DELIVER_SUCCESS:
       return {
         ...state,
-        loading: false,
-        successDelivered: true,
+        orderLoading: false,
+        orderDelivered: true,
       };
     case ORDER_DELIVER_FAIL:
       return {
-        loading: false,
-        error: action.payload,
+        orderLoading: false,
+        orderError: action.payload,
       };
 
     default:
