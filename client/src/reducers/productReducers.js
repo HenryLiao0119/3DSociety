@@ -11,13 +11,11 @@ const initialState = {
   products: [],
   product: [],
   error: null,
+  loading: true,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // get list
-    case PRODUCT_LIST_REQUEST:
-      return { ...state, loading: true };
     case PRODUCT_LIST_SUCCESS:
       return {
         ...state,
@@ -29,9 +27,6 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    // get single product
-    case PRODUCT_DETAILS_REQUEST:
-      return { ...state, loading: true };
     case PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,

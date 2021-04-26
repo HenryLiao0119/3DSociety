@@ -26,8 +26,6 @@ import { logout } from './userActions';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
-    dispatch({ type: ORDER_CREATE_REQUEST });
-
     const {
       users: { userCurrent },
     } = getState();
@@ -60,8 +58,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: ORDER_DETAILS_REQUEST });
-
     const {
       users: { userCurrent },
     } = getState();
@@ -95,8 +91,6 @@ export const payOrder = (orderId, paymentResult) => async (
   getState
 ) => {
   try {
-    dispatch({ type: ORDER_PAY_REQUEST });
-
     const {
       users: { userCurrent },
     } = getState();
@@ -128,8 +122,6 @@ export const payOrder = (orderId, paymentResult) => async (
 
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
-    dispatch({ type: ORDER_DELIVER_REQUEST });
-
     const {
       users: { userCurrent },
     } = getState();

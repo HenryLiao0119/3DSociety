@@ -31,13 +31,12 @@ const initialState = {
   users: null,
   userCurrent: null,
   error: null,
+  loading: true,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     // login user
-    case USER_LOGIN_REQUEST:
-      return { ...state, loading: true };
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
@@ -52,8 +51,6 @@ export default (state = initialState, action) => {
     case USER_LOGOUT:
       return { users: null, userCurrent: null, error: null };
     // reg. user
-    case USER_REGISTER_REQUEST:
-      return { ...state, loading: true };
     case USER_REGISTER_SUCCESS:
       return {
         ...state,
@@ -83,10 +80,9 @@ export default (state = initialState, action) => {
     //     userCurrent: {},
     //   };
     // update users
-    case USER_UPDATE_PROFILE_REQUEST:
-      return { ...state, loading: true };
     case USER_UPDATE_PROFILE_SUCCESS:
       return {
+        ...state,
         userCurrent: action.payload,
         loading: false,
         success: true,

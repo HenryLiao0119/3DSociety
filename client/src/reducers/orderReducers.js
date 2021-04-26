@@ -36,8 +36,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     // create order
-    case ORDER_CREATE_REQUEST:
-      return { ...state };
     case ORDER_CREATE_SUCCESS:
       return {
         ...state,
@@ -50,9 +48,6 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    // get order detail
-    case ORDER_DETAILS_REQUEST:
-      return { ...state };
     case ORDER_DETAILS_SUCCESS:
       return {
         ...state,
@@ -64,9 +59,6 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    // pay order
-    case ORDER_PAY_REQUEST:
-      return { ...state };
     case ORDER_PAY_SUCCESS:
       return {
         ...state,
@@ -81,8 +73,6 @@ export default (state = initialState, action) => {
     // case ORDER_PAY_RESET:
     //   return {};
     // get order list
-    case ORDER_DELIVER_REQUEST:
-      return { ...state };
     case ORDER_DELIVER_SUCCESS:
       return {
         ...state,

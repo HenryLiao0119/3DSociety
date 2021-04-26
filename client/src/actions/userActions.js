@@ -29,8 +29,6 @@ import axios from 'axios';
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch({ type: USER_LOGIN_REQUEST });
-
     // send data type
     const config = {
       headers: {
@@ -71,8 +69,6 @@ export const logout = () => async (dispatch) => {
 
 export const register = (name, email, password) => async (dispatch) => {
   try {
-    dispatch({ type: USER_REGISTER_REQUEST });
-
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -106,8 +102,6 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
-    dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
-
     const {
       users: { userCurrent },
     } = getState();
