@@ -25,7 +25,7 @@ import {
 
 const initialState = {
   order: [],
-  orderlist: [],
+  orderList: [],
   orderError: null,
   orderCreated: false,
   orderPaid: false,
@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         orderLoading: false,
-        orders: action.payload,
+        orderList: action.payload,
       };
     case ORDER_LIST_MY_FAIL:
       return {

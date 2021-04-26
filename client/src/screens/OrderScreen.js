@@ -21,7 +21,13 @@ const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orders);
-  const { order, loading, error, successPaid, successDelivered } = orderDetails;
+  const {
+    order,
+    orderLoading,
+    orderError,
+    orderPaid,
+    orderDelivered,
+  } = orderDetails;
 
   // const orderPay = useSelector((state) => state.orderPay);
   // const { loading: loadingPay, success: successPay } = orderPay;
@@ -48,11 +54,11 @@ const OrderScreen = ({ match, history }) => {
       document.body.appendChild(script);
     };
     // problem with reloading after pay
-    if (!order || successPaid || successDelivered || order._id !== orderId) {
+    if (!order || orderPaid || orderDelivered || order._id !== orderId) {
       // dispatch({ type: ORDER_PAY_RESET });
       // dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
-    } else if (!successPaid) {
+    } else if (!orderPaid) {
       if (!window.paypal) {
         addPayPalScipt();
       } else {
@@ -69,10 +75,10 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order));
   };
 
-  return loading ? (
+  return orderLoading ? (
     <Loader />
-  ) : error ? (
-    <Message variant='danger'>{error}</Message>
+  ) : orderError ? (
+    <Message variant='danger'>{orderError}</Message>
   ) : (
     <Fragment>
       <h1>Order {order._id}</h1>
@@ -212,7 +218,7 @@ const OrderScreen = ({ match, history }) => {
                   )}
                 </ListGroup.Item>
               )}
-              {loading && <Loader />}
+              {orderLoading && <Loader />}
               {userCurrent &&
                 userCurrent.isAdmin &&
                 order.isPaid &&

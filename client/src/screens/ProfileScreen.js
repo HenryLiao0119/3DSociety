@@ -13,7 +13,7 @@ import Message from '../components/Message';
 
 // action import
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
-// import { listMyOrders } from '../actions/orderAction';
+import { listMyOrders } from '../actions/orderActions';
 // // import { USER_UPDATE_PROFILE_RESET } from '../constants/userTypes';
 
 const ProfileScreen = ({ location, history }) => {
@@ -31,8 +31,8 @@ const ProfileScreen = ({ location, history }) => {
   // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   // const { success } = userUpdateProfile;
 
-  const orderListMy = useSelector((state) => state.orders);
-  const { orders, loading, error } = orderListMy;
+  const myOrderList = useSelector((state) => state.orders);
+  const { orderList, orderLoading, orderError } = myOrderList;
 
   useEffect(() => {
     if (!userCurrent) {
@@ -40,14 +40,14 @@ const ProfileScreen = ({ location, history }) => {
     } else {
       dispatch(listMyOrders());
       if (!userCurrent.name) {
-        dispatch(getUserDetails('profile'));
+        // dispatch(getUserDetails('profile'));
         dispatch(listMyOrders());
       } else {
         setName(userCurrent.name);
         setEmail(userCurrent.email);
       }
     }
-  }, [dispatch, history, userCurrent, user]);
+  }, [dispatch, history, userCurrent]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -114,12 +114,12 @@ const ProfileScreen = ({ location, history }) => {
           </Button>
         </Form>
       </Col>
-      {/* <Col md={9}>
+      <Col md={9}>
         <h2>My Orders</h2>
-        {loadingOrders ? (
+        {orderLoading ? (
           <Loader />
-        ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
+        ) : orderError ? (
+          <Message variant='danger'>{orderError}</Message>
         ) : (
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
@@ -133,7 +133,7 @@ const ProfileScreen = ({ location, history }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {orderList.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
@@ -164,7 +164,7 @@ const ProfileScreen = ({ location, history }) => {
             </tbody>
           </Table>
         )}
-      </Col> */}
+      </Col>
     </Row>
   );
 };
