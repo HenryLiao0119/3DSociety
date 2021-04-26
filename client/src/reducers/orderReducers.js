@@ -16,19 +16,20 @@ import {
   // ORDER_LIST_FAIL,
   // ORDER_LIST_SUCCESS,
   // ORDER_LIST_REQUEST,
-  // ORDER_DELIVER_FAIL,
-  // ORDER_DELIVER_SUCCESS,
-  // ORDER_DELIVER_REQUEST,
-  // ORDER_DELIVER_RESET,
-  // ORDER_CREATE_RESET,
+  ORDER_DELIVER_FAIL,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_RESET,
+  ORDER_CREATE_RESET,
 } from '../constants/orderTypes';
 
 const initialState = {
   order: [],
   orderlist: [],
   error: null,
-  successPaid: null,
-  SuccessDelivered: null,
+  successCreated: false,
+  successPaid: false,
+  successDelivered: false,
   loading: true,
 };
 
@@ -41,7 +42,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        success: true,
+        successCreated: true,
         order: action.payload,
       };
     case ORDER_CREATE_FAIL:
@@ -68,6 +69,7 @@ export default (state = initialState, action) => {
       return { ...state };
     case ORDER_PAY_SUCCESS:
       return {
+        ...state,
         loading: false,
         successPaid: true,
       };
@@ -79,6 +81,19 @@ export default (state = initialState, action) => {
     // case ORDER_PAY_RESET:
     //   return {};
     // get order list
+    case ORDER_DELIVER_REQUEST:
+      return { ...state };
+    case ORDER_DELIVER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        successDelivered: true,
+      };
+    case ORDER_DELIVER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
     // deliver orders
     default:
       return state;

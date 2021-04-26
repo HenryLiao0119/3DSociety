@@ -21,7 +21,7 @@ const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orders);
-  const { order, loading, error, successPaid } = orderDetails;
+  const { order, loading, error, successPaid, successDelivered } = orderDetails;
 
   // const orderPay = useSelector((state) => state.orderPay);
   // const { loading: loadingPay, success: successPay } = orderPay;
@@ -47,33 +47,26 @@ const OrderScreen = ({ match, history }) => {
       };
       document.body.appendChild(script);
     };
-
-    if (!order || successPaid || order._id !== orderId) {
+    // problem with reloading after pay
+    if (!order || successPaid || successDelivered || order._id !== orderId) {
       // dispatch({ type: ORDER_PAY_RESET });
       // dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
+    } else if (!successPaid) {
       if (!window.paypal) {
         addPayPalScipt();
       } else {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPaid]);
-
-  // useEffect(() => {
-  //   console.log(3);
-  //   dispatch(getOrderDetails(orderId));
-  //   console.log(4);
-  // }, [dispatch, match]);
-  // console.log(5);
+  }, [dispatch, order, orderId, userCurrent]);
 
   const successPaymentHandler = (paymentResult) => {
-    //dispatch(payOrder(orderId, paymentResult));
+    dispatch(payOrder(orderId, paymentResult));
   };
 
   const deliverHandler = () => {
-    //dispatch(deliverOrder(order));
+    dispatch(deliverOrder(order));
   };
 
   return loading ? (

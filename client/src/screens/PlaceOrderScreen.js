@@ -23,14 +23,14 @@ const PlaceOrderScreen = ({ history }) => {
   );
 
   const orderCreate = useSelector((state) => state.orders);
-  const { order, success, error } = orderCreate;
+  const { order, successCreated, error } = orderCreate;
 
   useEffect(() => {
-    if (success) {
+    if (successCreated) {
       history.push(`/order/${order._id}`);
     }
     // eslint-disable-next-line
-  }, [history, success]);
+  }, [history, successCreated]);
 
   const placeOrderHandler = () => {
     dispatch(
