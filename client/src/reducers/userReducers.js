@@ -79,7 +79,7 @@ export default (state = initialState, action) => {
     //   return {
     //     userCurrent: {},
     //   };
-    // update users
+    // update single user
     case USER_UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
@@ -112,6 +112,18 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case USER_DELETE_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    // update Users admin
+    case USER_UPDATE_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
+      };
+    case USER_UPDATE_FAIL:
       return {
         error: action.payload,
         loading: false,
