@@ -4,9 +4,9 @@ import {
   // USER_DETAILS_SUCCESS,
   // USER_DETAILS_FAIL,
   // USER_LIST_REQUEST,
-  // USER_LIST_SUCCESS,
-  // USER_LIST_FAIL,
-  // USER_LIST_RESET,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -92,10 +92,18 @@ export default (state = initialState, action) => {
         error: action.payload,
         loading: false,
       };
-    case USER_UPDATE_PROFILE_RESET:
-      return {};
     // grab all users
-
+    case USER_LIST_SUCCESS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+      };
+    case USER_LIST_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
     // delete user
     default:
       return state;
