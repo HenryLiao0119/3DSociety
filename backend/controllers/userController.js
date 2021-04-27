@@ -127,8 +127,6 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfile, getUsers };
-
 //@desc   delete a users
 //@route  DELETE /api/users/:id
 //@access Private/Admin
@@ -143,3 +141,12 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error('User does not exist');
   }
 });
+
+export {
+  authUser,
+  getUserProfile,
+  registerUser,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+};
