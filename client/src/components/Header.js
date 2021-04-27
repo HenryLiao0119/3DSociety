@@ -18,8 +18,9 @@ import SearchBar from '../components/SearchBar';
 const Header = () => {
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.users);
-  const { userCurrent } = userLogin;
+  // import states
+  const userStates = useSelector((state) => state.userStates);
+  const { userCurrent } = userStates;
 
   const logoutHandler = () => {
     dispatch(logout());

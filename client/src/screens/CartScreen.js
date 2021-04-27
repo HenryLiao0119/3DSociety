@@ -29,8 +29,8 @@ const CartScreen = ({ match, location, history }) => {
 
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const cartStates = useSelector((state) => state.cartStates);
+  const { cartItems } = cartStates;
 
   useEffect(() => {
     if (productId) {

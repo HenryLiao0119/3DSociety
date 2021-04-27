@@ -22,7 +22,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
-import UserDetailScreen from './screens/UserDetailScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 // components
 import Header from './components/Header';
@@ -48,7 +48,7 @@ const App = () => {
               <Route path='/order/:id?' component={OrderScreen} />
               {/* ADMIN ONLY ROUTES */}
               <Route path='/admin/userlist' component={UserListScreen} />
-              <Route path='/admin/user/:id/edit' component={UserDetailScreen} />
+              <Route path='/admin/user/:id/edit' component={UserEditScreen} />
             </Container>
           </main>
           <Footer />

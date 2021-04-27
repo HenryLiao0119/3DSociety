@@ -27,7 +27,7 @@ import { logout } from './userActions';
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     const {
-      users: { userCurrent },
+      userStates: { userCurrent },
     } = getState();
 
     const config = {
@@ -40,10 +40,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const { data } = await axios.post(`/api/orders/`, order, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
-    dispatch({
-      type: CART_CLEAR_ITEMS,
-      payload: data,
-    });
+    dispatch({ type: CART_CLEAR_ITEMS });
     localStorage.removeItem('cartItems');
   } catch (error) {
     dispatch({
@@ -59,7 +56,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     const {
-      users: { userCurrent },
+      userStates: { userCurrent },
     } = getState();
 
     const config = {
@@ -92,7 +89,7 @@ export const payOrder = (orderId, paymentResult) => async (
 ) => {
   try {
     const {
-      users: { userCurrent },
+      userStates: { userCurrent },
     } = getState();
 
     const config = {
@@ -123,7 +120,7 @@ export const payOrder = (orderId, paymentResult) => async (
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
     const {
-      users: { userCurrent },
+      userStates: { userCurrent },
     } = getState();
 
     const config = {
@@ -155,7 +152,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_MY_REQUEST });
 
     const {
-      users: { userCurrent },
+      userStates: { userCurrent },
     } = getState();
 
     const config = {

@@ -25,8 +25,8 @@ import {
 
 // components imports
 import Rating from '../components/Rating';
-// import Loader from '../components/Loader';
-// import Message from '../components/Message';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 // type imports
 // import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productTypes';
@@ -39,15 +39,8 @@ const ProductScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.products);
-  const {
-    product,
-    // error,
-    // loading
-  } = productDetails;
-
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+  const productStates = useSelector((state) => state.productStates);
+  const { product, error, loading } = productStates;
 
   // const productReviewCreate = useSelector((state) => state.productReviewCreate);
   // const {
@@ -88,144 +81,153 @@ const ProductScreen = ({ match, history }) => {
       <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
-      <Fragment>
-        <Row>
-          <Col md={6}>
-            <Image src={product.image} alt={product.name} fluid />
-          </Col>
-          <Col md={3}>
-            <ListGroup variant='flush'>
-              <ListGroup.Item>
-                <h3>{product.name}</h3>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
-              </ListGroup.Item>
-              <ListGroup.Item>File Price: ${product.priceFile}</ListGroup.Item>
-              <ListGroup.Item>
-                Product Price:{' '}
-                {product.priceProduct === 0
-                  ? 'Not For Sale'
-                  : '$ ' + product.priceProduct}
-              </ListGroup.Item>
-              <ListGroup.Item>
-                Description: {product.description}
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col md={3}>
-            <Card>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <Fragment>
+          <Row>
+            <Col md={6}>
+              <Image src={product.image} alt={product.name} fluid />
+            </Col>
+            <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <Row>
-                    <Col>Choose one:</Col>
-                    <Col>
-                      <Form.Control
-                        as='select'
-                        style={{ width: 'unset' }}
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                      >
-                        {product.priceProduct === 0 ? (
-                          <Fragment>
-                            <option value=''></option>
-                            <option value='file'>File</option>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <option value=''></option>
-                            <option value='file'>File</option>
-                            <option value='product'>Product</option>
-                          </Fragment>
-                        )}
-                      </Form.Control>
-                    </Col>
-                  </Row>
+                  <h3>{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Row>
-                    <Col>Price:</Col>
-                    <Col>
-                      {type === 'file'
-                        ? '$ ' + product.priceFile
-                        : product.priceProduct === 0
-                        ? 'Not for Sale'
-                        : '$ ' + product.priceProduct}
-                    </Col>
-                  </Row>
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                  />
                 </ListGroup.Item>
-
-                {type === 'product' ? (
+                <ListGroup.Item>
+                  File Price: ${product.priceFile}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Product Price:{' '}
+                  {product.priceProduct === 0
+                    ? 'Not For Sale'
+                    : '$ ' + product.priceProduct}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Description: {product.description}
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+            <Col md={3}>
+              <Card>
+                <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty:</Col>
+                      <Col>Choose one:</Col>
                       <Col>
                         <Form.Control
                           as='select'
                           style={{ width: 'unset' }}
-                          value={qty}
-                          onChange={(e) => setQty(e.target.value)}
+                          value={type}
+                          onChange={(e) => setType(e.target.value)}
                         >
-                          {product.productionAmount === 0 ? (
-                            <option key={0} value={0}>
-                              0
-                            </option>
+                          {product.priceProduct === 0 ? (
+                            <Fragment>
+                              <option value=''></option>
+                              <option value='file'>File</option>
+                            </Fragment>
                           ) : (
-                            [...Array(product.productionAmount).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )
+                            <Fragment>
+                              <option value=''></option>
+                              <option value='file'>File</option>
+                              <option value='product'>Product</option>
+                            </Fragment>
                           )}
                         </Form.Control>
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                ) : null}
-
-                {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty</Col>
+                      <Col>Price:</Col>
                       <Col>
-                        <Form.Control
-                          as='select'
-                          style={{ width: 'unset' }}
-                          value={qty}
-                          onChange={(e) => setQty(e.target.value)}
-                        >
-                          c
-                          {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
+                        {type === 'file'
+                          ? '$ ' + product.priceFile
+                          : product.priceProduct === 0
+                          ? 'Not for Sale'
+                          : '$ ' + product.priceProduct}
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                )}
 
-                <ListGroup.Item>
-                  <Button
-                    className='btn-block'
-                    type='button'
-                    disabled={product.CardcountInStock === 0}
-                    onClick={addToCartHandler}
-                  >
-                    Add To Cart
-                  </Button>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
-        {/* <Row>
+                  {type === 'product' ? (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty:</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            style={{ width: 'unset' }}
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                          >
+                            {product.productionAmount === 0 ? (
+                              <option key={0} value={0}>
+                                0
+                              </option>
+                            ) : (
+                              [...Array(product.productionAmount).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  ) : null}
+
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            style={{ width: 'unset' }}
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                          >
+                            c
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
+
+                  <ListGroup.Item>
+                    <Button
+                      className='btn-block'
+                      type='button'
+                      disabled={product.CardcountInStock === 0}
+                      onClick={addToCartHandler}
+                    >
+                      Add To Cart
+                    </Button>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card>
+            </Col>
+          </Row>
+          {/* <Row>
           <Col md={6}>
             <h2>Reviews</h2>
             {product.reviews.length === 0 && <Message>No Reviews</Message>}
@@ -282,7 +284,8 @@ const ProductScreen = ({ match, history }) => {
             </ListGroup>
           </Col>
         </Row> */}
-      </Fragment>
+        </Fragment>
+      )}
     </Fragment>
   );
 };

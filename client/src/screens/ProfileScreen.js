@@ -25,14 +25,14 @@ const ProfileScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const userDetails = useSelector((state) => state.users);
-  const { loading, error, success, userCurrent } = userDetails;
+  const userStates = useSelector((state) => state.userStates);
+  const { loading, error, success, userCurrent } = userStates;
 
   // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   // const { success } = userUpdateProfile;
 
-  const myOrderList = useSelector((state) => state.orders);
-  const { orderList, orderLoading, orderError } = myOrderList;
+  const orderStates = useSelector((state) => state.orderStates);
+  const { orderList, orderLoading, orderError } = orderStates;
 
   useEffect(() => {
     if (!userCurrent) {

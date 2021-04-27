@@ -28,15 +28,15 @@ const userCurrentFromStorage = localStorage.getItem('userCurrent')
 
 // initialstate
 const initialState = {
-  cart: {
+  cartStates: {
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
     paymentMethod: paymentMethodFromStorage,
   },
-  users: {
+  userStates: {
     userCurrent: userCurrentFromStorage,
-    users: [],
-    loading: true,
+    userList: [],
+    user: [],
   },
 };
 

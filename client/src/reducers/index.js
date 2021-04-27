@@ -5,8 +5,8 @@ import userReducers from './userReducers';
 import orderReducers from './orderReducers';
 
 export default combineReducers({
-  products: productReducers,
-  cart: cartReducers,
-  users: userReducers,
-  orders: orderReducers,
+  productStates: productReducers,
+  cartStates: cartReducers,
+  userStates: userReducers,
+  orderStates: orderReducers,
 });

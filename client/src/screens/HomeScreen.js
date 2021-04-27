@@ -20,8 +20,8 @@ const HomeScreen = ({ match }) => {
 
   // redux
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.products);
-  const { products, loading, error } = productList;
+  const productStates = useSelector((state) => state.productStates);
+  const { productList, loading, error } = productStates;
 
   useEffect(() => {
     dispatch(listProducts());
@@ -37,7 +37,7 @@ const HomeScreen = ({ match }) => {
       ) : (
         <Fragment>
           <Row>
-            {products.map((product) => (
+            {productList.map((product) => (
               <Col
                 className='align-items-stretch d-flex'
                 key={product._id}

@@ -6,8 +6,8 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { saveShippingAddress } from '../actions/cartActions';
 
 const ShippingScreen = ({ history }) => {
-  const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
+  const cartStates = useSelector((state) => state.cartStates);
+  const { shippingAddress } = cartStates;
 
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);

@@ -23,8 +23,8 @@ const LoginScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.users);
-  const { loading, error, userCurrent } = userLogin;
+  const userStates = useSelector((state) => state.userStates);
+  const { loading, error, userCurrent } = userStates;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 

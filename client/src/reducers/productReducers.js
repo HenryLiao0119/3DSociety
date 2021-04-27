@@ -8,8 +8,8 @@ import {
 } from '../constants/productTypes';
 
 const initialState = {
-  products: [],
   product: [],
+  productList: [],
   error: null,
   loading: true,
 };
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload,
+        productList: action.payload,
       };
     case PRODUCT_LIST_FAIL:
       return {

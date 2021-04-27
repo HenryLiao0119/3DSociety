@@ -9,8 +9,8 @@ import { listUsers, deleteUsers } from '../actions/userActions';
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
-  const userDetails = useSelector((state) => state.users);
-  const { loading, error, users, userCurrent } = userDetails;
+  const userStates = useSelector((state) => state.userStates);
+  const { userLoading, userError, userList, userCurrent } = userStates;
 
   useEffect(() => {
     if (userCurrent && userCurrent.isAdmin) {
@@ -29,10 +29,10 @@ const UserListScreen = ({ history }) => {
   return (
     <Fragment>
       <h1>Users</h1>
-      {loading ? (
+      {userLoading ? (
         <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
+      ) : userError ? (
+        <Message variant='danger'>{userError}</Message>
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
@@ -45,7 +45,7 @@ const UserListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {userList.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>

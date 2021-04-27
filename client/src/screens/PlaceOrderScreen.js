@@ -8,40 +8,40 @@ import { createOrder } from '../actions/orderActions';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+
+  const cartStates = useSelector((state) => state.cartStates);
+  const { cartItems, shippingAddress, paymentMethod } = cartStates;
+
+  const orderStates = useSelector((state) => state.orderStates);
+  const { order, orderCreated, orderError } = orderStates;
 
   // cal prices
-  cart.itemsPrice = cart.cartItems.reduce(
+  const itemsPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
 
-  cart.shippingPrice = cart.itemsPrice > 25 ? 0 : 10;
-  cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
-  cart.totalPrice = Number(
-    (cart.itemsPrice + cart.shippingPrice + cart.taxPrice).toFixed(2)
-  );
-
-  const orderCreate = useSelector((state) => state.orders);
-  const { order, successCreated, error } = orderCreate;
+  const shippingPrice = itemsPrice > 25 ? 0 : 10;
+  const taxPrice = Number((0.15 * itemsPrice).toFixed(2));
+  const totalPrice = Number((itemsPrice + shippingPrice + taxPrice).toFixed(2));
 
   useEffect(() => {
-    if (successCreated) {
+    if (orderCreated) {
       history.push(`/order/${order._id}`);
     }
     // eslint-disable-next-line
-  }, [history, successCreated]);
+  }, [history, orderCreated]);
 
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
+        orderItems: cartItems,
+        shippingAddress: shippingAddress,
+        paymentMethod: paymentMethod,
+        itemsPrice: itemsPrice,
+        shippingPrice: shippingPrice,
+        taxPrice: taxPrice,
+        totalPrice: totalPrice,
       })
     );
   };
@@ -56,9 +56,8 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {cart.shippingAddress.address} {cart.shippingAddress.city}{' '}
-                {cart.shippingAddress.postalCode},{' '}
-                {cart.shippingAddress.country}
+                {shippingAddress.address} {shippingAddress.city}{' '}
+                {shippingAddress.postalCode}, {shippingAddress.country}
               </p>
             </ListGroup.Item>
 
@@ -66,17 +65,17 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>Payment Method</h2>
               <p>
                 <strong>Method: </strong>
-                {cart.paymentMethod}
+                {paymentMethod}
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.length === 0 ? (
+              {cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {cart.cartItems.map((item, index) => (
+                  {cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -115,7 +114,7 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>Items</Col>
                   <Col>
                     $
-                    {cart.itemsPrice
+                    {itemsPrice
                       .toFixed(2)
                       .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   </Col>
@@ -124,7 +123,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>${shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -132,7 +131,7 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>Tax</Col>
                   <Col>
                     $
-                    {cart.taxPrice
+                    {taxPrice
                       .toFixed(2)
                       .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   </Col>
@@ -143,20 +142,20 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>Total</Col>
                   <Col>
                     $
-                    {cart.totalPrice
+                    {totalPrice
                       .toFixed(2)
                       .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {error && <Message variant='danger'>{error}</Message>}
+                {orderError && <Message variant='danger'>{orderError}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn-block'
-                  disable={cart.cartItems === 0}
+                  disable={cartItems === 0}
                   onClick={placeOrderHandler}
                 >
                   Place Order

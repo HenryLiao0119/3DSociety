@@ -20,14 +20,14 @@ const OrderScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.orders);
+  const orderStates = useSelector((state) => state.orderStates);
   const {
     order,
     orderLoading,
     orderError,
     orderPaid,
     orderDelivered,
-  } = orderDetails;
+  } = orderStates;
 
   // const orderPay = useSelector((state) => state.orderPay);
   // const { loading: loadingPay, success: successPay } = orderPay;
@@ -35,8 +35,8 @@ const OrderScreen = ({ match, history }) => {
   // const orderDeliver = useSelector((state) => state.orderDeliver);
   // const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
-  const userLogin = useSelector((state) => state.users);
-  const { userCurrent } = userLogin;
+  const userStates = useSelector((state) => state.userStates);
+  const { userCurrent } = userStates;
 
   useEffect(() => {
     if (!userCurrent) {

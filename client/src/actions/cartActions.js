@@ -28,7 +28,10 @@ export const addToCart = (id, qty, type) => async (dispatch, getState) => {
   });
 
   // save in localStorage
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+  localStorage.setItem(
+    'cartItems',
+    JSON.stringify(getState().cartStates.cartItems)
+  );
 };
 
 // remove cart item
@@ -40,7 +43,10 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
   });
 
   // update localstorage
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+  localStorage.setItem(
+    'cartItems',
+    JSON.stringify(getState().cartStates.cartItems)
+  );
 };
 
 // save shipping address
