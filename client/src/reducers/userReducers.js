@@ -28,8 +28,8 @@ import {
 } from '../constants/userTypes';
 
 const initialState = {
-  users: null,
-  userCurrent: null,
+  users: [],
+  userCurrent: [],
   error: null,
   loading: true,
 };

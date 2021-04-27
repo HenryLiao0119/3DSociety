@@ -35,6 +35,8 @@ const initialState = {
   },
   users: {
     userCurrent: userCurrentFromStorage,
+    users: [],
+    loading: true,
   },
 };
 
