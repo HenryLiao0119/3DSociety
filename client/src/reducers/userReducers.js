@@ -17,9 +17,9 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
-  // USER_DELETE_REQUEST,
-  // USER_DELETE_SUCCESS,
-  // USER_DELETE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
   // USER_UPDATE_RESET,
   // USER_UPDATE_REQUEST,
   // USER_UPDATE_SUCCESS,
@@ -105,6 +105,17 @@ export default (state = initialState, action) => {
         loading: false,
       };
     // delete user
+    case USER_DELETE_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
+      };
+    case USER_DELETE_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
