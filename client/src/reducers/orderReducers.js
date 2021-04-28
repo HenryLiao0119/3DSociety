@@ -45,6 +45,7 @@ export default (state = initialState, action) => {
       };
     case ORDER_CREATE_FAIL:
       return {
+        ...state,
         orderLoading: false,
         orderError: action.payload,
       };
@@ -56,6 +57,7 @@ export default (state = initialState, action) => {
       };
     case ORDER_DETAILS_FAIL:
       return {
+        ...state,
         orderLoading: false,
         orderError: action.payload,
       };
@@ -67,6 +69,7 @@ export default (state = initialState, action) => {
       };
     case ORDER_PAY_FAIL:
       return {
+        ...state,
         orderLoading: false,
         orderError: action.payload,
       };
@@ -81,6 +84,7 @@ export default (state = initialState, action) => {
       };
     case ORDER_LIST_MY_FAIL:
       return {
+        ...state,
         orderLoading: false,
         orderError: action.payload,
       };
@@ -93,6 +97,7 @@ export default (state = initialState, action) => {
       };
     case ORDER_DELIVER_FAIL:
       return {
+        ...state,
         orderLoading: false,
         orderError: action.payload,
       };

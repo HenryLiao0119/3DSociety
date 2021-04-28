@@ -38,6 +38,7 @@ export default (state = initialState, action) => {
       };
     case USER_LOGIN_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -60,6 +61,7 @@ export default (state = initialState, action) => {
       };
     case USER_REGISTER_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -72,6 +74,7 @@ export default (state = initialState, action) => {
       };
     case USER_DETAILS_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -85,6 +88,7 @@ export default (state = initialState, action) => {
       };
     case USER_UPDATE_PROFILE_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -97,6 +101,7 @@ export default (state = initialState, action) => {
       };
     case USER_LIST_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -109,6 +114,7 @@ export default (state = initialState, action) => {
       };
     case USER_DELETE_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };
@@ -121,6 +127,7 @@ export default (state = initialState, action) => {
       };
     case USER_UPDATE_FAIL:
       return {
+        ...state,
         userError: action.payload,
         userLoading: false,
       };

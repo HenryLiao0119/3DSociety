@@ -21,7 +21,7 @@ const HomeScreen = ({ match }) => {
   // redux
   const dispatch = useDispatch();
   const productStates = useSelector((state) => state.productStates);
-  const { productList, loading, error } = productStates;
+  const { productList, productLoading, productError } = productStates;
 
   useEffect(() => {
     dispatch(listProducts());
@@ -30,10 +30,10 @@ const HomeScreen = ({ match }) => {
   return (
     <Fragment>
       <h1>Latest Creations</h1>
-      {loading ? (
+      {productLoading ? (
         <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
+      ) : productError ? (
+        <Message variant='danger'>{productError}</Message>
       ) : (
         <Fragment>
           <Row>
