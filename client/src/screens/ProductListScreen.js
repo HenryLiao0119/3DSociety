@@ -10,7 +10,11 @@ import {
   deleteProduct,
   createProduct,
 } from '../actions/productActions';
-import { PRODUCT_CREATE_RESET } from '../constants/productTypes';
+import {
+  PRODUCT_CREATE_RESET,
+  PRODUCT_UPDATE_RESET,
+  PRODUCT_DELETE_RESET,
+} from '../constants/productTypes';
 
 const ProductListScreen = ({ history, match }) => {
   // const pageNumber = match.params.pageNumber || 1;
@@ -24,6 +28,7 @@ const ProductListScreen = ({ history, match }) => {
     productList,
     productDeleted,
     productCreated,
+    productUpdated,
     //  page, pages
   } = productStates;
 
@@ -31,11 +36,25 @@ const ProductListScreen = ({ history, match }) => {
   const { userCurrent } = userStates;
 
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET });
+    // productCreated
+    //   ? dispatch({ type: PRODUCT_CREATE_RESET })
+    //   : productUpdated
+    //   ? dispatch({ type: PRODUCT_UPDATE_RESET })
+    //   : productDeleted
+    //   ? dispatch({ type: PRODUCT_DELETE_RESET })
+    //   : null;
+    if (productCreated) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+    }
+    if (productDeleted) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    }
+    if (productUpdated) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+    }
     if (!userCurrent || !userCurrent.isAdmin) {
       history.push(`/login`);
     }
-
     if (productCreated) {
       history.push(`/admin/product/${product._id}/edit`);
     } else {
@@ -46,19 +65,20 @@ const ProductListScreen = ({ history, match }) => {
     history,
     productDeleted,
     productCreated,
+    productUpdated,
     product,
     userCurrent,
     // pageNumber,
   ]);
 
   const deleteHandler = (id) => {
-    if (window.confirm('are you sure')) {
+    if (window.confirm('Please Confirm You Are Deleting A Product')) {
       dispatch(deleteProduct(id));
     }
   };
 
   const createProductHandler = () => {
-    // dispatch(createProduct());
+    dispatch(createProduct());
   };
 
   return (
@@ -88,9 +108,9 @@ const ProductListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
+                <th>FILE PRICE</th>
+                <th>PRODUCT PRICE</th>
                 <th></th>
               </tr>
             </thead>
@@ -99,9 +119,9 @@ const ProductListScreen = ({ history, match }) => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>${product.price}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
+                  <td>${product.priceFile}</td>
+                  <td>${product.priceProduct}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>

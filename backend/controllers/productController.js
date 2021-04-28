@@ -86,12 +86,13 @@ const updateProduct = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: 'Sample Name',
-    price: 0,
+    priceFile: 0,
+    priceProduct: 0,
     user: req.user._id,
     image: '/image/sample.jpg',
-    brand: 'Sample brand',
     category: 'Sample category',
-    countInStock: 0,
+    fileLink: 'benchy.zip',
+    productionAmount: 5,
     numReviews: 0,
     description: 'Sample description',
   });

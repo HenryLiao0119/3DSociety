@@ -5,7 +5,7 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
-  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_RESET,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
   PRODUCT_CREATE_RESET,
@@ -56,9 +56,11 @@ export default (state = initialState, action) => {
       };
     case PRODUCT_DETAILS_FAIL:
       return {
+        ...state,
         productLoading: false,
         productError: action.payload,
       };
+
     // delete product
     case PRODUCT_DELETE_SUCCESS:
       return {
@@ -68,8 +70,14 @@ export default (state = initialState, action) => {
       };
     case PRODUCT_DELETE_FAIL:
       return {
+        ...state,
         productError: action.payload,
         productLoading: false,
+      };
+    case PRODUCT_DELETE_RESET:
+      return {
+        ...state,
+        productDeleted: false,
       };
     // create product
     case PRODUCT_CREATE_SUCCESS:
@@ -85,6 +93,11 @@ export default (state = initialState, action) => {
         productError: action.payload,
         productLoading: false,
       };
+    case PRODUCT_CREATE_RESET:
+      return {
+        ...state,
+        productCreated: false,
+      };
     // update productc
     case PRODUCT_UPDATE_SUCCESS:
       return {
@@ -97,6 +110,11 @@ export default (state = initialState, action) => {
         ...state,
         productError: action.payload,
         productLoading: false,
+      };
+    case PRODUCT_UPDATE_RESET:
+      return {
+        ...state,
+        productUpdated: false,
       };
     default:
       return state;
