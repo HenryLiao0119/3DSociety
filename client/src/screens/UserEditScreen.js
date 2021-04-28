@@ -44,7 +44,7 @@ const UserEditScreen = ({ match, history }) => {
     } else {
       history.push(`/login`);
     }
-  }, [dispatch, userId, user, history, userCurrent]);
+  }, [dispatch, userId, user, history, userCurrent, userUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();

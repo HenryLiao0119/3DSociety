@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
       return {
         user: [],
         userList: [],
-        userCurrent: [],
+        userCurrent: null,
         userError: null,
         userLoading: true,
         userUpdated: false,

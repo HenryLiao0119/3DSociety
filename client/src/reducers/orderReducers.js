@@ -13,9 +13,9 @@ import {
   ORDER_LIST_MY_SUCCESS,
   ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_RESET,
-  // ORDER_LIST_FAIL,
-  // ORDER_LIST_SUCCESS,
-  // ORDER_LIST_REQUEST,
+  ORDER_LIST_FAIL,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_REQUEST,
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_REQUEST,
@@ -73,8 +73,6 @@ export default (state = initialState, action) => {
         orderLoading: false,
         orderError: action.payload,
       };
-    // case ORDER_PAY_RESET:
-    //   return {};
     // get order list
     case ORDER_LIST_MY_SUCCESS:
       return {
@@ -101,7 +99,19 @@ export default (state = initialState, action) => {
         orderLoading: false,
         orderError: action.payload,
       };
-
+    // List Orders
+    case ORDER_LIST_SUCCESS:
+      return {
+        ...state,
+        orderLoading: false,
+        orderList: action.payload,
+      };
+    case ORDER_LIST_FAIL:
+      return {
+        ...state,
+        orderLoading: false,
+        orderError: action.payload,
+      };
     default:
       return state;
   }
