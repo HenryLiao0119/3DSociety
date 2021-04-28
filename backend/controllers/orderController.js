@@ -116,29 +116,13 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc   update user
-//@route  PUT /api/users/:id
+//@desc   Get all orders
+//@route  GET /api/orders
 //@access Private/Admin
-const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
 
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin === true ? true : false;
-
-    const updateUser = await user.save();
-
-    res.json({
-      _id: updateUser._id,
-      name: updateUser.name,
-      email: updateUser.email,
-      isAdmin: updateUser.isAdmin,
-    });
-  } else {
-    res.status(404);
-    throw new Error('User not found');
-  }
+  res.json(orders);
 });
 
 export {
@@ -146,8 +130,6 @@ export {
   getOrderById,
   updateOrderToPaid,
   getMyOrders,
-  // getOrders,
+  getOrders,
   updateOrderToDelivered,
-  getUserById,
-  updateUser,
 };
