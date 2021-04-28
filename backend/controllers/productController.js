@@ -65,11 +65,12 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (product) {
     product.name = req.body.name || product.name;
     product.description = req.body.description || product.description;
-    product.brand = req.body.brand || product.brand;
     product.image = req.body.image || product.image;
     product.category = req.body.category || product.category;
-    product.price = req.body.price || product.price;
-    product.countInStock = req.body.countInStock || product.countInStock;
+    product.priceFile = req.body.priceFile || product.priceFile;
+    product.priceProduct = req.body.priceProduct || product.priceProduct;
+    product.productionAmount =
+      req.body.productionAmount || product.productionAmount;
 
     const updateProduct = await product.save();
 

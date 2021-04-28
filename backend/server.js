@@ -1,5 +1,6 @@
 import express from 'express';
 import color from 'colors';
+import path from 'path';
 
 // import for database
 import connectDB from './config/db.js';
