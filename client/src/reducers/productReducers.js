@@ -30,9 +30,10 @@ const initialState = {
   productList: [],
   productError: null,
   productLoading: true,
+  productCreated: false,
   productDeleted: false,
   productUpdated: false,
-  productCreated: false,
+  productReviewed: false,
 };
 
 export default (state = initialState, action) => {
@@ -115,6 +116,19 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productUpdated: false,
+      };
+    // review product
+    case PRODUCT_CREATE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        productReviewed: true,
+        productLoading: false,
+      };
+    case PRODUCT_CREATE_REVIEW_FAIL:
+      return {
+        ...state,
+        productError: action.payload,
+        productLoading: false,
       };
     default:
       return state;
