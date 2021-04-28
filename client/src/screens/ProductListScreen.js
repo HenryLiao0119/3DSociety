@@ -36,21 +36,11 @@ const ProductListScreen = ({ history, match }) => {
   const { userCurrent } = userStates;
 
   useEffect(() => {
-    // productCreated
-    //   ? dispatch({ type: PRODUCT_CREATE_RESET })
-    //   : productUpdated
-    //   ? dispatch({ type: PRODUCT_UPDATE_RESET })
-    //   : productDeleted
-    //   ? dispatch({ type: PRODUCT_DELETE_RESET })
-    //   : null;
     if (productCreated) {
       dispatch({ type: PRODUCT_CREATE_RESET });
     }
     if (productDeleted) {
       dispatch({ type: PRODUCT_DELETE_RESET });
-    }
-    if (productUpdated) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
     }
     if (!userCurrent || !userCurrent.isAdmin) {
       history.push(`/login`);
