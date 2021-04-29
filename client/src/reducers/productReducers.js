@@ -130,6 +130,11 @@ export default (state = initialState, action) => {
         productError: action.payload,
         productLoading: false,
       };
+    case PRODUCT_CREATE_REVIEW_RESET:
+      return {
+        ...state,
+        productReviewed: false,
+      };
     default:
       return state;
   }
