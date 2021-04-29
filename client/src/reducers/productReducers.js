@@ -28,6 +28,8 @@ import {
 const initialState = {
   product: [],
   productList: [],
+  page: null,
+  pages: null,
   productError: null,
   productLoading: true,
   productCreated: false,
@@ -43,6 +45,8 @@ export default (state = initialState, action) => {
         ...state,
         productLoading: false,
         productList: action.payload,
+        pages: action.payload.pages,
+        page: action.payload.page,
       };
     case PRODUCT_LIST_FAIL:
       return {
