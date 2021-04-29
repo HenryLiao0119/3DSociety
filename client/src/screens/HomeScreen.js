@@ -4,7 +4,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-// import Paginate from '../components/Paginate';
+import Paginate from '../components/Paginate';
 // import ProductCarousel from '../components/ProductCarousel';
 
 // bootstrap
@@ -15,8 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
-  // const keyword = match.params.keyword;
-  // const pageNumber = match.params.pageNumber || 1;
+  const keyword = match.params.keyword;
+  const pageNumber = match.params.pageNumber || 1;
 
   // redux
   const dispatch = useDispatch();
@@ -24,8 +24,8 @@ const HomeScreen = ({ match }) => {
   const { productList, productLoading, productError } = productStates;
 
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <Fragment>
@@ -50,11 +50,11 @@ const HomeScreen = ({ match }) => {
               </Col>
             ))}
           </Row>
-          {/* <Paginate
+          <Paginate
             page={page}
             pages={pages}
             keyword={keyword ? keyword : ''}
-          /> */}
+          />
         </Fragment>
       )}
     </Fragment>
