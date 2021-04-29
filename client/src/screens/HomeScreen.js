@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 // components
 import Product from '../components/Product';
@@ -21,7 +21,13 @@ const HomeScreen = ({ match }) => {
   // redux
   const dispatch = useDispatch();
   const productStates = useSelector((state) => state.productStates);
-  const { productList, productLoading, productError } = productStates;
+  const {
+    productList,
+    productLoading,
+    productError,
+    page,
+    pages,
+  } = productStates;
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));

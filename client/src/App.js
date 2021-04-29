@@ -58,6 +58,14 @@ const App = () => {
                 component={ProductEditScreen}
               />
               <Route path='/admin/orderlist' component={OrderListScreen} />
+
+              {/* search and page paths */}
+              <Route path='/search/:keyword' component={HomeScreen} exact />
+              <Route path='/page/:pageNumber' component={HomeScreen} exact />
+              <Route
+                path='/search/:keyword/page/:pageNumber'
+                component={HomeScreen}
+              />
             </Container>
           </main>
           <Footer />
