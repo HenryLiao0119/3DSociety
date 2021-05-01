@@ -5,7 +5,8 @@ import asyncHandler from 'express-async-handler';
 //@route  GET /api/products
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2;
+  // control how many items per page
+  const pageSize = 4;
   const page = Number(req.query.pageNumber) || 1;
 
   // this is how to get the question mark
