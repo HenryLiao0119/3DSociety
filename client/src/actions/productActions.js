@@ -71,6 +71,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
 
 // delete product
 export const deleteProduct = (id) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_REQUEST });
   try {
     const {
       userStates: { userCurrent },
@@ -100,6 +101,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
 export const createProduct = () => async (dispatch, getState) => {
   try {
+    dispatch({ type: PRODUCT_REQUEST });
     const {
       userStates: { userCurrent },
     } = getState();
@@ -126,6 +128,7 @@ export const createProduct = () => async (dispatch, getState) => {
 
 // update product
 export const updateProduct = (product) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_REQUEST });
   try {
     const {
       userStates: { userCurrent },
@@ -162,6 +165,7 @@ export const createProductReview = (productId, review) => async (
   dispatch,
   getState
 ) => {
+  dispatch({ type: PRODUCT_REQUEST });
   try {
     const {
       userStates: { userCurrent },
@@ -190,6 +194,7 @@ export const createProductReview = (productId, review) => async (
 
 export const listTopProducts = () => async (dispatch) => {
   try {
+    dispatch({ type: PRODUCT_REQUEST });
     const { data } = await axios.get(`/api/products/top`);
 
     dispatch({ type: PRODUCT_TOP_SUCCESS, payload: data });
