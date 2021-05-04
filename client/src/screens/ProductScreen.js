@@ -58,7 +58,7 @@ const ProductScreen = ({ match, history }) => {
       setComment('');
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, productReviewed, productLoading]);
+  }, [dispatch, match, productReviewed]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty?${qty}?type?${type}`);

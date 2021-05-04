@@ -21,7 +21,7 @@ import {
 } from '../constants/productTypes';
 
 const initialState = {
-  product: [],
+  product: { reviews: [] },
   productList: [],
   productTop: [],
   pages: null,
@@ -51,6 +51,7 @@ export default (state = initialState, action) => {
       };
     case PRODUCT_LIST_FAIL:
       return {
+        ...state,
         productLoading: false,
         productError: action.payload,
       };
