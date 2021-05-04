@@ -51,14 +51,14 @@ const ProductScreen = ({ match, history }) => {
   const { userCurrent } = userStates;
 
   useEffect(() => {
+    dispatch(getSingleProduct(match.params.id));
     if (productReviewed) {
       alert('Review Submitted!');
       setRating(0);
       setComment('');
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-    dispatch(getSingleProduct(match.params.id));
-  }, [dispatch, match, productReviewed]);
+  }, [dispatch, match, productReviewed, productLoading]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty?${qty}?type?${type}`);

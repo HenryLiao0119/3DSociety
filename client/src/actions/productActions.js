@@ -24,12 +24,15 @@ import {
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
+  PRODUCT_REQUEST,
 } from '../constants/productTypes';
 
 // list products
 export const listProducts = (keyword = '', pageNumber = '') => async (
   dispatch
 ) => {
+  dispatch({ type: PRODUCT_REQUEST });
+
   try {
     const { data } = await axios.get(
       `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
@@ -50,6 +53,8 @@ export const listProducts = (keyword = '', pageNumber = '') => async (
 // get single product
 export const getSingleProduct = (id) => async (dispatch) => {
   try {
+    dispatch({ type: PRODUCT_REQUEST });
+
     const { data } = await axios.get(`/api/products/${id}`);
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
