@@ -139,6 +139,19 @@ export default (state = initialState, action) => {
         ...state,
         productReviewed: false,
       };
+    // top product
+    case PRODUCT_TOP_SUCCESS:
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
+    case PRODUCT_TOP_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
