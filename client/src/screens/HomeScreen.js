@@ -5,7 +5,7 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
-// import ProductCarousel from '../components/ProductCarousel';
+import ProductCarousel from '../components/ProductCarousel';
 
 // bootstrap
 import { Row, Col } from 'react-bootstrap';
@@ -35,6 +35,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <Fragment>
+      {!keyword && <ProductCarousel />}
       <h1>Latest Creations</h1>
       {productLoading ? (
         <Loader />

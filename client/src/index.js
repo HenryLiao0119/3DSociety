@@ -4,6 +4,7 @@ import App from './App';
 
 // import custom booststrap
 import './bootstrap.min.css';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
