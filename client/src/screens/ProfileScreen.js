@@ -14,6 +14,7 @@ import Message from '../components/Message';
 // action import
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
+import { ORDER_REQUEST } from '../constants/orderTypes';
 // // import { USER_UPDATE_PROFILE_RESET } from '../constants/userTypes';
 
 const ProfileScreen = ({ location, history }) => {
@@ -58,6 +59,10 @@ const ProfileScreen = ({ location, history }) => {
         updateUserProfile({ id: userCurrent._id, name, email, password })
       );
     }
+  };
+
+  const onClick = (e) => {
+    dispatch({ type: ORDER_REQUEST });
   };
 
   return (
@@ -129,7 +134,7 @@ const ProfileScreen = ({ location, history }) => {
                 <th>TOTAL</th>
                 <th>PAID</th>
                 <th>DELIVERED</th>
-                <th></th>
+                <th>MORE INFO</th>
               </tr>
             </thead>
             <tbody>
@@ -137,7 +142,7 @@ const ProfileScreen = ({ location, history }) => {
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
+                  <td>${order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
@@ -154,7 +159,11 @@ const ProfileScreen = ({ location, history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
+                      <Button
+                        className='btn-sm'
+                        variant='light'
+                        onClick={onClick}
+                      >
                         Details
                       </Button>
                     </LinkContainer>
