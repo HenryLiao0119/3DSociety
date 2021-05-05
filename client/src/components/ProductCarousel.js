@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
 import Message from './Message';
 import { listTopProducts } from '../actions/productActions';
+import { PRODUCT_REQUEST } from '../constants/productTypes';
 
 const ProductCarousel = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
 
+  const onClick = (e) => {
+    dispatch({ type: PRODUCT_REQUEST });
+  };
+
   return productLoading ? (
     <Loader />
   ) : productError ? (
@@ -24,7 +29,7 @@ const ProductCarousel = () => {
     <Carousel pause='hover' className='bg-dark'>
       {productTop.map((product) => (
         <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`}>
+          <Link to={`/product/${product._id}`} onClick={onClick}>
             <Image src={product.image} alt={product.name} fluid />
             <Carousel.Caption className='carousel-caption'>
               <h2>

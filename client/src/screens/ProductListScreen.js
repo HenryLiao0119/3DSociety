@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-// import Paginate from '../components/Paginate';
+import Paginate from '../components/Paginate';
 import {
   listProducts,
   deleteProduct,
@@ -17,7 +17,7 @@ import {
 } from '../constants/productTypes';
 
 const ProductListScreen = ({ history, match }) => {
-  // const pageNumber = match.params.pageNumber || 1;
+  const pageNumber = match.params.pageNumber || 1;
   const dispatch = useDispatch();
 
   const productStates = useSelector((state) => state.productStates);
@@ -29,7 +29,8 @@ const ProductListScreen = ({ history, match }) => {
     productDeleted,
     productCreated,
     productUpdated,
-    //  page, pages
+    page,
+    pages,
   } = productStates;
 
   const userStates = useSelector((state) => state.userStates);
@@ -48,7 +49,7 @@ const ProductListScreen = ({ history, match }) => {
     if (productCreated) {
       history.push(`/admin/product/${product._id}/edit`);
     } else {
-      dispatch(listProducts());
+      dispatch(listProducts('', pageNumber));
     }
   }, [
     dispatch,
@@ -58,7 +59,7 @@ const ProductListScreen = ({ history, match }) => {
     productUpdated,
     product,
     userCurrent,
-    // pageNumber,
+    pageNumber,
   ]);
 
   const deleteHandler = (id) => {
@@ -130,7 +131,7 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          {/* <Paginate page={page} pages={pages} isAdmin={true} /> */}
+          <Paginate page={page} pages={pages} isAdmin={true} />
         </Fragment>
       )}
     </Fragment>
