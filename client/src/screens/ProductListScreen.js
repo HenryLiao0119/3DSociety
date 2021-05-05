@@ -100,7 +100,7 @@ const ProductListScreen = ({ history, match }) => {
                 <th>ID</th>
                 <th>NAME</th>
                 <th>CATEGORY</th>
-                <th>FILE PRICE</th>
+                {/* <th>FILE PRICE</th> */}
                 <th>PRODUCT PRICE</th>
                 <th></th>
               </tr>
@@ -111,7 +111,7 @@ const ProductListScreen = ({ history, match }) => {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
-                  <td>${product.priceFile}</td>
+                  {/* <td>${product.priceFile}</td> */}
                   <td>${product.priceProduct}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>

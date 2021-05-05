@@ -13,7 +13,7 @@ const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState('');
-  const [priceFile, setPriceFile] = useState(0);
+  // const [priceFile, setPriceFile] = useState(0);
   const [priceProduct, setPriceProduct] = useState(0);
   const [image, setImage] = useState('');
   const [productionAmount, setProductionAmount] = useState(0);
@@ -44,7 +44,7 @@ const ProductEditScreen = ({ match, history }) => {
           dispatch(getSingleProduct(productId));
         } else {
           setName(product.name);
-          setPriceFile(product.priceFile);
+          // setPriceFile(product.priceFile);
           setPriceProduct(product.priceProduct);
           setImage(product.image);
           setProductionAmount(product.productionAmount);
@@ -85,7 +85,7 @@ const ProductEditScreen = ({ match, history }) => {
       updateProduct({
         _id: productId,
         name,
-        priceFile,
+        // priceFile,
         priceProduct,
         image,
         productionAmount,
@@ -121,7 +121,7 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='priceFile'>
+            {/* <Form.Group controlId='priceFile'>
               <Form.Label>File Price</Form.Label>
               <Form.Control
                 type='number'
@@ -129,7 +129,7 @@ const ProductEditScreen = ({ match, history }) => {
                 value={priceFile}
                 onChange={(e) => setPriceFile(e.target.value)}
               ></Form.Control>
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group controlId='priceProduct'>
               <Form.Label>Product Price</Form.Label>
@@ -159,7 +159,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId='productionAmount'>
-              <Form.Label>Count in Stock</Form.Label>
+              <Form.Label>Production Amount</Form.Label>
               <Form.Control
                 type='number'
                 placeholder='Enter Production Amount'

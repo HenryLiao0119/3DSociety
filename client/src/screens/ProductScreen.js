@@ -33,7 +33,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productTypes';
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
-  const [type, setType] = useState('');
+  // const [type, setType] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -61,7 +61,7 @@ const ProductScreen = ({ match, history }) => {
   }, [dispatch, match, productReviewed]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty?${qty}?type?${type}`);
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   const submitHandler = (e) => {
@@ -99,24 +99,24 @@ const ProductScreen = ({ match, history }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>
                   File Price: ${product.priceFile}
-                </ListGroup.Item>
+                </ListGroup.Item> */}
                 <ListGroup.Item>
                   Product Price:{' '}
                   {product.priceProduct === 0
                     ? 'Not For Sale'
-                    : '$ ' + product.priceProduct}
+                    : '$' + product.priceProduct}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Description: {product.description}
+                  Description: <br /> {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Row>
                       <Col>Choose one:</Col>
                       <Col>
@@ -141,49 +141,48 @@ const ProductScreen = ({ match, history }) => {
                         </Form.Control>
                       </Col>
                     </Row>
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
                   <ListGroup.Item>
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        {type === 'file'
+                        {/* {type === 'file'
                           ? '$ ' + product.priceFile
                           : product.priceProduct === 0
                           ? 'Not for Sale'
-                          : '$ ' + product.priceProduct}
+                          : '$ ' + product.priceProduct} */}
+                        ${product.priceProduct}
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
-                  {type === 'product' ? (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty:</Col>
-                        <Col>
-                          <Form.Control
-                            as='select'
-                            style={{ width: 'unset' }}
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {product.productionAmount === 0 ? (
-                              <option key={0} value={0}>
-                                0
-                              </option>
-                            ) : (
-                              [...Array(product.productionAmount).keys()].map(
-                                (x) => (
-                                  <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </option>
-                                )
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Qty:</Col>
+                      <Col>
+                        <Form.Control
+                          as='select'
+                          style={{ width: 'unset' }}
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {product.productionAmount === 0 ? (
+                            <option key={0} value={0}>
+                              0
+                            </option>
+                          ) : (
+                            [...Array(product.productionAmount).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
                               )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ) : null}
+                            )
+                          )}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
 
                   <ListGroup.Item>
                     <Button
@@ -201,7 +200,7 @@ const ProductScreen = ({ match, history }) => {
           </Row>
           <Row>
             <Col md={6}>
-              <h2>Reviews</h2>
+              <h2 className='mt-5'>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant='flush'>
                 {product.reviews.map((review) => (
