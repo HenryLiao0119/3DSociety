@@ -21,10 +21,11 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
+  ORDER_REQUEST,
 } from '../constants/orderTypes';
 
 const initialState = {
-  order: [],
+  order: {},
   orderList: [],
   orderError: null,
   orderCreated: false,
@@ -35,6 +36,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ORDER_REQUEST:
+      return {
+        ...state,
+        orderLoading: true,
+      };
     // create order
     case ORDER_CREATE_SUCCESS:
       return {

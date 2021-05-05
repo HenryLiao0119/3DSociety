@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listOrders } from '../actions/orderActions';
+import { ORDER_REQUEST } from '../constants/orderTypes';
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ const OrderListScreen = ({ history }) => {
       history.push(`/login`);
     }
   }, [dispatch, history, userCurrent]);
+
+  const onClick = (e) => {
+    dispatch({ type: ORDER_REQUEST });
+  };
 
   return (
     <Fragment>
@@ -75,7 +80,11 @@ const OrderListScreen = ({ history }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button
+                      variant='light'
+                      className='btn-sm'
+                      onClick={onClick}
+                    >
                       DETAILS
                     </Button>
                   </LinkContainer>

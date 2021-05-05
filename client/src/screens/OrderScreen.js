@@ -29,16 +29,11 @@ const OrderScreen = ({ match, history }) => {
     orderDelivered,
   } = orderStates;
 
-  // const orderPay = useSelector((state) => state.orderPay);
-  // const { loading: loadingPay, success: successPay } = orderPay;
-
-  // const orderDeliver = useSelector((state) => state.orderDeliver);
-  // const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
-
   const userStates = useSelector((state) => state.userStates);
   const { userCurrent } = userStates;
 
   useEffect(() => {
+    console.log('order screen useeffec');
     if (!userCurrent) {
       history.push('/login');
     }
@@ -65,7 +60,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, userCurrent]);
+  }, [dispatch, order, orderId, userCurrent, orderPaid, orderDelivered]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -74,6 +69,9 @@ const OrderScreen = ({ match, history }) => {
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
   };
+  console.log(order);
+  console.log(orderLoading);
+  console.log(orderError);
 
   return orderLoading ? (
     <Loader />

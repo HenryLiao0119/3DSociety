@@ -20,6 +20,7 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_RESET,
   ORDER_CREATE_RESET,
+  ORDER_REQUEST,
 } from '../constants/orderTypes';
 import { CART_CLEAR_ITEMS } from '../constants/cartTypes';
 import { logout } from './userActions';
