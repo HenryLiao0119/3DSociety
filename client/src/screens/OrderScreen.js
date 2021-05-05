@@ -50,6 +50,11 @@ const OrderScreen = ({ match, history }) => {
     };
     // problem with reloading after pay
     if (!order || orderPaid || orderDelivered || order._id !== orderId) {
+      console.log(order);
+      console.log(orderPaid);
+      console.log(orderDelivered);
+      console.log(order._id);
+      console.log(orderId);
       // dispatch({ type: ORDER_PAY_RESET });
       // dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
@@ -69,9 +74,6 @@ const OrderScreen = ({ match, history }) => {
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
   };
-  console.log(order);
-  console.log(orderLoading);
-  console.log(orderError);
 
   return orderLoading ? (
     <Loader />

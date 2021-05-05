@@ -37,10 +37,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    fileLink: {
-      type: String,
-      required: true,
-    },
+    // fileLink: {
+    //   type: String,
+    //   required: true,
+    // },
     reviews: [reviewSchema],
     rating: {
       type: Number,
@@ -52,11 +52,11 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    priceFile: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
+    // priceFile: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0,
+    // },
     priceProduct: {
       type: Number,
       required: true,

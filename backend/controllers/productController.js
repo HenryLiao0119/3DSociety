@@ -41,19 +41,25 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc   delete a product
-//@route  DELETE /api/products/:id
+//@desc   Create Product
+//@route  POST /api/products/
 //@access Private/Admin
-const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product({
+    name: 'Sample Name',
+    // priceFile: 0,
+    priceProduct: 0,
+    user: req.user._id,
+    image: '/image/sample.jpg',
+    category: 'Sample category',
+    // fileLink: 'benchy.zip',
+    productionAmount: 5,
+    numReviews: 0,
+    description: 'Sample description',
+  });
 
-  if (product) {
-    await product.remove();
-    res.json({ message: 'Product removed' });
-  } else {
-    res.status(404);
-    throw new Error('Product does not exist');
-  }
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
 });
 
 //@desc   update product
@@ -67,7 +73,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.description = req.body.description || product.description;
     product.image = req.body.image || product.image;
     product.category = req.body.category || product.category;
-    product.priceFile = req.body.priceFile || product.priceFile;
+    // product.priceFile = req.body.priceFile || product.priceFile;
     product.priceProduct = req.body.priceProduct || product.priceProduct;
     product.productionAmount =
       req.body.productionAmount || product.productionAmount;
@@ -81,25 +87,19 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc   Create Product
-//@route  POST /api/products/
+//@desc   delete a product
+//@route  DELETE /api/products/:id
 //@access Private/Admin
-const createProduct = asyncHandler(async (req, res) => {
-  const product = new Product({
-    name: 'Sample Name',
-    priceFile: 0,
-    priceProduct: 0,
-    user: req.user._id,
-    image: '/image/sample.jpg',
-    category: 'Sample category',
-    fileLink: 'benchy.zip',
-    productionAmount: 5,
-    numReviews: 0,
-    description: 'Sample description',
-  });
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
 
-  const createdProduct = await product.save();
-  res.status(201).json(createdProduct);
+  if (product) {
+    await product.remove();
+    res.json({ message: 'Product removed' });
+  } else {
+    res.status(404);
+    throw new Error('Product does not exist');
+  }
 });
 
 //@desc   create new review

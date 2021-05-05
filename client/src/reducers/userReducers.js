@@ -22,7 +22,7 @@ const initialState = {
   userList: [],
   userCurrent: [],
   userError: null,
-  userLoading: true,
+  userLoading: false,
   userUpdated: false,
   userDeleted: false,
 };
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
         userList: [],
         userCurrent: null,
         userError: null,
-        userLoading: true,
+        userLoading: false,
         userUpdated: false,
         userDeleted: false,
       };

@@ -1,5 +1,5 @@
 main {
-  height: 100vh;
+  min-height: 90vh;
 }
 
 h3 {
@@ -20,6 +20,10 @@ h2 {
   padding: 0.5rem 0;
 }
 
+p {
+  margin: 0;
+}
+
 img {
   height: 175px;
 }
@@ -27,7 +31,7 @@ img {
 footer {
   background-color: #593196;
   color: white;
-  height: 10vh;
+  min-height: 10vh;
 }
 
 /* carousel */
