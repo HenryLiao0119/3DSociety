@@ -24,8 +24,8 @@ import Message from '../components/Message';
 const CartScreen = ({ match, location, history }) => {
   // pulling data from params
   const productId = match.params.id;
-  const qty = location.search ? Number(location.search.split('?')[2]) : 1;
-  const type = location.search ? String(location.search.split('?')[4]) : 1;
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  // const type = location.search ? String(location.search.split('?')[4]) : 1;
 
   const dispatch = useDispatch();
 
@@ -34,9 +34,9 @@ const CartScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty, type));
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty, type]);
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
@@ -76,20 +76,13 @@ const CartScreen = ({ match, location, history }) => {
                         )
                       }
                     >
-                      {' '}
-                      {item.type === 'file' ? (
-                        <option key='1' value='1'>
-                          1
-                        </option>
-                      ) : (
-                        <Fragment>
-                          {[...Array(item.productionAmount).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Fragment>
-                      )}
+                      <Fragment>
+                        {[...Array(item.productionAmount).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Fragment>
                     </Form.Control>
                   </Col>
                   <Col md={2}>
@@ -115,7 +108,7 @@ const CartScreen = ({ match, location, history }) => {
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
                 items
               </h2>
-              $
+              Price $
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)

@@ -1,5 +1,4 @@
 import {
-  USER_DETAILS_RESET,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   USER_LIST_SUCCESS,
@@ -15,6 +14,8 @@ import {
   USER_DELETE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
+  USER_DELETE_RESET,
+  USER_UPDATE_RESET,
 } from '../constants/userTypes';
 
 const initialState = {
@@ -29,6 +30,17 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    // user resets
+    case USER_DELETE_RESET:
+      return {
+        ...state,
+        userDeleted: false,
+      };
+    case USER_UPDATE_RESET:
+      return {
+        ...state,
+        userUpdated: false,
+      };
     // login user
     case USER_LOGIN_SUCCESS:
       return {

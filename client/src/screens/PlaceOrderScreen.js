@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
+import { ORDER_CREATE_RESET } from '../constants/orderTypes';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const PlaceOrderScreen = ({ history }) => {
     if (orderCreated) {
       history.push(`/order/${order._id}`);
     }
+    dispatch({ type: ORDER_CREATE_RESET });
     // eslint-disable-next-line
   }, [history, orderCreated]);
 

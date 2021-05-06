@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listUsers, deleteUsers } from '../actions/userActions';
+import { USER_DELETE_RESET } from '../constants/userTypes';
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ const UserListScreen = ({ history }) => {
   } = userStates;
 
   useEffect(() => {
+    if (userDeleted) {
+      dispatch({ type: USER_DELETE_RESET });
+    }
     if (userCurrent && userCurrent.isAdmin) {
       dispatch(listUsers());
     } else {

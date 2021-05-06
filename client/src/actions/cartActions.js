@@ -7,11 +7,11 @@ import {
 } from '../constants/cartTypes';
 
 // add to cart
-export const addToCart = (id, qty, type) => async (dispatch, getState) => {
+export const addToCart = (id, qty) => async (dispatch, getState) => {
   // grab data
   const { data } = await axios.get(`/api/products/${id}`);
 
-  const price = type === 'file' ? data.priceFile : data.priceProduct;
+  const price = data.priceProduct;
 
   // send data
   dispatch({
@@ -23,7 +23,6 @@ export const addToCart = (id, qty, type) => async (dispatch, getState) => {
       price: price,
       productionAmount: data.productionAmount,
       qty,
-      type,
     },
   });
 

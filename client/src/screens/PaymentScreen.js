@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { savePaymentMethod } from '../actions/cartActions';
+import { ORDER_CREATE_RESET } from '../constants/orderTypes';
 
 const PaymentScreen = ({ history }) => {
   const cartStates = useSelector((state) => state.cartStates);
@@ -40,14 +41,14 @@ const PaymentScreen = ({ history }) => {
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
 
-            <Form.Check
+            {/* <Form.Check
               type='radio'
               label='Credit Card'
               id='Stripe'
               name='paymentMethod'
               value='Credit Card'
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
+            ></Form.Check> */}
           </Col>
         </Form.Group>
 
