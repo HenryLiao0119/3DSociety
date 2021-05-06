@@ -31,10 +31,6 @@ connectDB();
 // allow us to accept json body for auth
 app.use(express.json());
 
-// send to port with the message
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
@@ -49,6 +45,19 @@ app.get('/api/config/paypal', (req, res) => {
 // making a folder static for uploads
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+// production set up
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/client/build')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....');
+  });
+}
 
 // error route need to be at the end
 app.use(notFound);
