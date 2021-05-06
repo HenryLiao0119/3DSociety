@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { listOrders } from '../actions/orderActions';
 import { ORDER_REQUEST } from '../constants/orderTypes';
 
@@ -30,6 +31,7 @@ const OrderListScreen = ({ history }) => {
 
   return (
     <Fragment>
+      <Meta title='List Of Orders' />
       <Row className='align-items-center'>
         <Col>
           <h1>Orders</h1>

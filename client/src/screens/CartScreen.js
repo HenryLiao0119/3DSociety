@@ -20,6 +20,7 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 
 // component imports
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 
 const CartScreen = ({ match, location, history }) => {
   // pulling data from params
@@ -47,6 +48,7 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <Row>
+      <Meta title='Shopping Cart' />
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (

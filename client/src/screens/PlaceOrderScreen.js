@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import Meta from '../components/Meta';
 import { createOrder } from '../actions/orderActions';
 import { ORDER_CREATE_RESET } from '../constants/orderTypes';
 
@@ -50,6 +51,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <Fragment>
+      <Meta title='Place Order' />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

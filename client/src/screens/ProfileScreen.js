@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // component import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 
 // action import
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
@@ -28,9 +29,6 @@ const ProfileScreen = ({ location, history }) => {
 
   const userStates = useSelector((state) => state.userStates);
   const { loading, error, success, userCurrent } = userStates;
-
-  // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  // const { success } = userUpdateProfile;
 
   const orderStates = useSelector((state) => state.orderStates);
   const { orderList, orderLoading, orderError } = orderStates;
@@ -67,6 +65,7 @@ const ProfileScreen = ({ location, history }) => {
 
   return (
     <Row>
+      <Meta title='Profile' />
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}

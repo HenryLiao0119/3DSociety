@@ -4,6 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { listUsers, deleteUsers } from '../actions/userActions';
 import { USER_DELETE_RESET } from '../constants/userTypes';
 
@@ -38,6 +39,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <Fragment>
+      <Meta title='List Of Users' />
       <h1>Users</h1>
       {userLoading ? (
         <Loader />

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 import { getSingleProduct, updateProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productTypes';
 
@@ -97,6 +98,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <Fragment>
+      <Meta title='Edit Product' />
       <Link to='/admin/productlist' className='btn btn-light my-3'>
         Go Back
       </Link>

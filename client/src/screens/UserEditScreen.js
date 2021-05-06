@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { getUserDetails, updateUser } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
 import { USER_UPDATE_RESET } from '../constants/userTypes';
@@ -19,13 +20,6 @@ const UserEditScreen = ({ match, history }) => {
 
   const userStates = useSelector((state) => state.userStates);
   const { userLoading, userError, user, userCurrent, userUpdated } = userStates;
-
-  // const userUpdate = useSelector((state) => state.userUpdate);
-  // const {
-  //   loading: loadingUpdate,
-  //   error: errorUpdate,
-  //   success: successUpdate,
-  // } = userUpdate;
 
   useEffect(() => {
     if (userCurrent && userCurrent.isAdmin) {
@@ -53,6 +47,7 @@ const UserEditScreen = ({ match, history }) => {
 
   return (
     <Fragment>
+      <Meta title='Edit User' />
       <Link to='/admin/userlist' className='btn btn-light my-3'>
         Go Back
       </Link>

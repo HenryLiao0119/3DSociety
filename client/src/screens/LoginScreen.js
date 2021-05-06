@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 
 // action import
 import { login } from '../actions/userActions';
@@ -41,6 +42,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <Meta title='Login' />
       <h1>Sign In</h1>
       {userError && <Message variant='danger'>{userError}</Message>}
       {userLoading && <Loader />}
