@@ -1,6 +1,29 @@
 import Product from '../models/productModel.js';
 import asyncHandler from 'express-async-handler';
 
+//@desc   Create Product
+//@route  POST /api/products/
+//@access Private/Admin
+const createProduct = asyncHandler(async (req, res) => {
+  // create boiler plate for new product
+  const product = new Product({
+    name: 'Sample Name',
+    // priceFile: 0,
+    priceProduct: 0,
+    user: req.user._id,
+    image: '/image/sample.jpg',
+    category: 'Sample category',
+    // fileLink: 'benchy.zip',
+    productionAmount: 5,
+    numReviews: 0,
+    description: 'Sample description',
+  });
+
+  // create the product and send it
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+
 //@desc   Fetch all products
 //@route  GET /api/products
 //@access Public
@@ -31,8 +54,10 @@ const getProducts = asyncHandler(async (req, res) => {
 //@route  GET /api/products/:id
 //@access Public
 const getProductById = asyncHandler(async (req, res) => {
+  // grab product by id
   const product = await Product.findById(req.params.id);
 
+  // check product and send data
   if (product) {
     res.json(product);
   } else {
@@ -41,33 +66,14 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc   Create Product
-//@route  POST /api/products/
-//@access Private/Admin
-const createProduct = asyncHandler(async (req, res) => {
-  const product = new Product({
-    name: 'Sample Name',
-    // priceFile: 0,
-    priceProduct: 0,
-    user: req.user._id,
-    image: '/image/sample.jpg',
-    category: 'Sample category',
-    // fileLink: 'benchy.zip',
-    productionAmount: 5,
-    numReviews: 0,
-    description: 'Sample description',
-  });
-
-  const createdProduct = await product.save();
-  res.status(201).json(createdProduct);
-});
-
 //@desc   update product
 //@route  PUT /api/products/:id
 //@access Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
+  // grab data by id
   const product = await Product.findById(req.params.id);
 
+  // check product and change the data
   if (product) {
     product.name = req.body.name || product.name;
     product.description = req.body.description || product.description;
@@ -78,6 +84,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.productionAmount =
       req.body.productionAmount || product.productionAmount;
 
+    // update the data and send it back
     const updateProduct = await product.save();
 
     res.json(updateProduct);
@@ -91,8 +98,10 @@ const updateProduct = asyncHandler(async (req, res) => {
 //@route  DELETE /api/products/:id
 //@access Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
+  // grab the product by id
   const product = await Product.findById(req.params.id);
 
+  // check product and remove it
   if (product) {
     await product.remove();
     res.json({ message: 'Product removed' });
@@ -106,10 +115,13 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //@route  Post /api/products/:id/reviews
 //@access Private
 const createProductReview = asyncHandler(async (req, res) => {
+  // grab the review from req.
   const { rating, comment } = req.body;
 
+  // find the product by id
   const product = await Product.findById(req.params.id);
 
+  // check product and review
   if (product) {
     const alreadyReviewed = product.reviews.find(
       (r) => r.user.toString() === req.user._id.toString()
@@ -120,6 +132,7 @@ const createProductReview = asyncHandler(async (req, res) => {
       throw new Error('User already review');
     }
 
+    // create new review
     const review = {
       name: req.user.name,
       rating: Number(rating),
@@ -127,14 +140,14 @@ const createProductReview = asyncHandler(async (req, res) => {
       user: req.user._id,
     };
 
+    // add review and update # of reviews and rating
     product.reviews.push(review);
-
     product.numReviews = product.reviews.length;
-
     product.rating =
       product.reviews.reduce((acc, item) => item.rating + acc, 0) /
       product.reviews.length;
 
+    // confirm and send the data
     await product.save();
     res.status(201).json({ message: 'Review added' });
   } else {
@@ -147,10 +160,15 @@ const createProductReview = asyncHandler(async (req, res) => {
 //@route  GET /api/products/top
 //@access Public
 const getTopProducts = asyncHandler(async (req, res) => {
+  // grab data by sorting the reviews top 3 best
   const products = await Product.find({}).sort({ rating: -1 }).limit(3);
 
   res.json(products);
 });
+
+//@desc   delete a review
+//@route  DELETE /api/products/:id/reviews
+//@access Private/Admin
 
 export {
   getProducts,
