@@ -3,6 +3,7 @@ import path from 'path';
 import multer from 'multer';
 const router = express.Router();
 
+// create the folder for storage
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, 'uploads/');
@@ -15,6 +16,7 @@ const storage = multer.diskStorage({
   },
 });
 
+// check the file inputed by user
 function checkFileType(file, cb) {
   const filetypes = /jpg|jpeg|png/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -27,6 +29,7 @@ function checkFileType(file, cb) {
   }
 }
 
+// set update as the data
 const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
@@ -34,6 +37,7 @@ const upload = multer({
   },
 });
 
+// send the data
 router.post('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
