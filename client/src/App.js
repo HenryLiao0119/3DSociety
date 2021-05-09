@@ -39,6 +39,7 @@ const App = () => {
           <Header />
           <main className='py-3'>
             <Container>
+              {/* public and private routes */}
               <Route path='/' component={HomeScreen} exact />
               <Route path='/product/:id' component={ProductScreen} />
               <Route path='/cart/:id?' component={CartScreen} />
@@ -49,6 +50,7 @@ const App = () => {
               <Route path='/payment' component={PaymentScreen} />
               <Route path='/placeorder' component={PlaceOrderScreen} />
               <Route path='/order/:id?' component={OrderScreen} />
+
               {/* ADMIN ONLY ROUTES */}
               <Route path='/admin/userlist' component={UserListScreen} />
               <Route path='/admin/user/:id/edit' component={UserEditScreen} />
