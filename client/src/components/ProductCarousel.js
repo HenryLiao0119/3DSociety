@@ -1,15 +1,28 @@
 import React, { useEffect } from 'react';
+
+// router import
 import { Link } from 'react-router-dom';
+
+// bootstrap import
 import { Carousel, Image } from 'react-bootstrap';
+
+// redux
 import { useDispatch, useSelector } from 'react-redux';
+
+// components
 import Loader from './Loader';
 import Message from './Message';
+
+// actions
 import { listTopProducts } from '../actions/productActions';
+
+// types
 import { PRODUCT_REQUEST } from '../constants/productTypes';
 
 const ProductCarousel = () => {
   const dispatch = useDispatch();
 
+  // import states
   const productStates = useSelector((state) => state.productStates);
   const { productLoading, productError, productTop } = productStates;
 
@@ -17,7 +30,8 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
 
-  const onClick = (e) => {
+  // product loading reset
+  const onClick = () => {
     dispatch({ type: PRODUCT_REQUEST });
   };
 

@@ -1,4 +1,6 @@
 import React from 'react';
+
+// helmet import
 import { Helmet } from 'react-helmet';
 
 const Meta = ({ title, description, keywords }) => {

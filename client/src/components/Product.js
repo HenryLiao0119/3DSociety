@@ -15,7 +15,8 @@ const Product = ({ product }) => {
   // redux
   const dispatch = useDispatch();
 
-  const onClick = (e) => {
+  // reset the product loading
+  const onClick = () => {
     dispatch({ type: PRODUCT_REQUEST });
   };
 

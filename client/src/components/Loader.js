@@ -1,4 +1,6 @@
 import React from 'react';
+
+// bootstrap import
 import { Spinner } from 'react-bootstrap';
 
 const Loader = () => {

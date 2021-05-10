@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// bootstrap import
 import { Form, Button } from 'react-bootstrap';
 
 const SearchBar = ({ history }) => {

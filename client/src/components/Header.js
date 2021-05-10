@@ -22,6 +22,7 @@ const Header = () => {
   const userStates = useSelector((state) => state.userStates);
   const { userCurrent } = userStates;
 
+  // logout function
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -30,13 +31,18 @@ const Header = () => {
     <header>
       <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
+          {/* page link */}
           <LinkContainer to='/'>
             <Navbar.Brand>3D Society</Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            {/* search bar */}
             <Route render={({ history }) => <SearchBar history={history} />} />
+
+            {/* nav tabs */}
+            {/* login/signout/sign in */}
             <Nav className='ml-auto'>
               {userCurrent ? (
                 <NavDropdown title={userCurrent.name} id='username'>
@@ -54,6 +60,8 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
+
+              {/*admin tab */}
               {userCurrent && userCurrent.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
@@ -67,6 +75,8 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
+
+              {/* cart tab */}
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i> Cart

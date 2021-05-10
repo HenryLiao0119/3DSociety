@@ -1,5 +1,9 @@
 import React from 'react';
+
+// boostrap import
 import { Nav } from 'react-bootstrap';
+
+// bootstrap router import
 import { LinkContainer } from 'react-router-bootstrap';
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
