@@ -50,20 +50,23 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
 
 // save shipping address
 export const saveShippingAddress = (data) => async (dispatch) => {
+  // send data
   dispatch({
     type: CART_SAVE_SHIPPING_ADDRESS,
     payload: data,
   });
 
+  // add to localstorage
   localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
 
 // save payment
 export const savePaymentMethod = (data) => async (dispatch) => {
+  // send data
   dispatch({
     type: CART_SAVE_PAYMENT_METHOD,
     payload: data,
   });
-
+  // add to localstorage
   localStorage.setItem('paymentMethod', JSON.stringify(data));
 };
