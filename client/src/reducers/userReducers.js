@@ -54,6 +54,7 @@ export default (state = initialState, action) => {
         userError: action.payload,
         userLoading: false,
       };
+    // logout
     case USER_LOGOUT:
       return {
         user: [],

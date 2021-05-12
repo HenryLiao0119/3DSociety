@@ -1,6 +1,7 @@
 import {
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_CREATE_RESET,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
   ORDER_PAY_FAIL,
@@ -13,7 +14,6 @@ import {
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_RESET,
-  ORDER_CREATE_RESET,
   ORDER_REQUEST,
 } from '../constants/orderTypes';
 
@@ -65,6 +65,7 @@ export default (state = initialState, action) => {
         orderLoading: false,
         orderError: action.payload,
       };
+    // order details
     case ORDER_DETAILS_SUCCESS:
       return {
         ...state,

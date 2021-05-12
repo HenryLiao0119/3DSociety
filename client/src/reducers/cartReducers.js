@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
 
+      // check if item exist
       const existItem = state.cartItems.find((x) => x.product === item.product);
 
       if (existItem) {

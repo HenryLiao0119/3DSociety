@@ -36,11 +36,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    // loading state reset
     case PRODUCT_REQUEST:
       return {
         ...state,
         productLoading: true,
       };
+    // product list
     case PRODUCT_LIST_SUCCESS:
       return {
         ...state,
@@ -55,6 +57,7 @@ export default (state = initialState, action) => {
         productLoading: false,
         productError: action.payload,
       };
+    // product detail
     case PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
