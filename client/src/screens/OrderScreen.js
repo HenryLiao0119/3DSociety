@@ -1,34 +1,45 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
+
+// paypal import
 import { PayPalButton } from 'react-paypal-button-v2';
+
+// bootstrap import
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// router import
 import { Link } from 'react-router-dom';
+
+// component import
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Meta from '../components/Meta';
+
+// actions import
 import {
   getOrderDetails,
   payOrder,
   deliverOrder,
 } from '../actions/orderActions';
+
+// constants import
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderTypes';
 
 const OrderScreen = ({ match, history }) => {
+  // pull id
   const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
 
+  // redux
   const dispatch = useDispatch();
 
   const orderStates = useSelector((state) => state.orderStates);
-  const {
-    order,
-    orderLoading,
-    orderError,
-    orderPaid,
-    orderDelivered,
-  } = orderStates;
+  const { order, orderLoading, orderError, orderPaid, orderDelivered } =
+    orderStates;
 
   const userStates = useSelector((state) => state.userStates);
   const { userCurrent } = userStates;
@@ -38,6 +49,8 @@ const OrderScreen = ({ match, history }) => {
     if (!userCurrent) {
       history.push('/login');
     }
+
+    // paypal api
     const addPayPalScipt = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal');
       const script = document.createElement('script');
@@ -49,7 +62,7 @@ const OrderScreen = ({ match, history }) => {
       };
       document.body.appendChild(script);
     };
-    // problem with reloading after pay
+
     if (
       !order ||
       orderPaid ||

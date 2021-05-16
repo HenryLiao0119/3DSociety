@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
+
+// bootstrap import
 import { Form, Button, Col } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// component import
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
+
+// actions import
 import { savePaymentMethod } from '../actions/cartActions';
 
 const PaymentScreen = ({ history }) => {
+  const [paymentMethod, setPaymentMethod] = useState('Stripe');
+
+  // redux
+  const dispatch = useDispatch();
   const cartStates = useSelector((state) => state.cartStates);
   const { shippingAddress } = cartStates;
 
   if (!shippingAddress) {
     history.push('/shipping');
   }
-
-  const [paymentMethod, setPaymentMethod] = useState('Stripe');
-
-  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -1,14 +1,27 @@
 import React, { Fragment, useEffect } from 'react';
+
+// bootstrap import
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// router import
 import { Link } from 'react-router-dom';
+
+// components import
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Meta from '../components/Meta';
+
+// action import
 import { createOrder } from '../actions/orderActions';
+
+// constant import
 import { ORDER_CREATE_RESET } from '../constants/orderTypes';
 
 const PlaceOrderScreen = ({ history }) => {
+  // redux
   const dispatch = useDispatch();
 
   const cartStates = useSelector((state) => state.cartStates);

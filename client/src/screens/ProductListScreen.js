@@ -1,24 +1,37 @@
 import React, { Fragment, useEffect } from 'react';
+
+// router import
 import { LinkContainer } from 'react-router-bootstrap';
+
+// bootstrap import
 import { Table, Button, Row, Col } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// component import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import Meta from '../components/Meta';
+
+// actions import
 import {
   listProducts,
   deleteProduct,
   createProduct,
 } from '../actions/productActions';
+
+// constants import
 import {
   PRODUCT_CREATE_RESET,
-  PRODUCT_UPDATE_RESET,
   PRODUCT_DELETE_RESET,
 } from '../constants/productTypes';
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
+
+  // redux
   const dispatch = useDispatch();
 
   const productStates = useSelector((state) => state.productStates);

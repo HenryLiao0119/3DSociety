@@ -1,16 +1,29 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
+
+// router import
 import { Link } from 'react-router-dom';
+
+// bootstrap import
 import { Form, Button } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// components import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import Meta from '../components/Meta';
+
+// actions import
 import { getSingleProduct, updateProduct } from '../actions/productActions';
+
+// constant import
 import { PRODUCT_UPDATE_RESET } from '../constants/productTypes';
 
 const ProductEditScreen = ({ match, history }) => {
+  // pull id
   const productId = match.params.id;
 
   const [name, setName] = useState('');
@@ -22,15 +35,12 @@ const ProductEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState('');
   const [uploading, setUploading] = useState(false);
 
+  // redux
   const dispatch = useDispatch();
 
   const productStates = useSelector((state) => state.productStates);
-  const {
-    productLoading,
-    productError,
-    product,
-    productUpdated,
-  } = productStates;
+  const { productLoading, productError, product, productUpdated } =
+    productStates;
 
   const userStates = useSelector((state) => state.userStates);
   const { userCurrent } = userStates;
@@ -58,6 +68,7 @@ const ProductEditScreen = ({ match, history }) => {
     }
   }, [dispatch, productId, product, productUpdated, history, userCurrent]);
 
+  // upload file function api
   const uploadFileHander = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
