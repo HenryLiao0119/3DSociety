@@ -1,14 +1,27 @@
 import React, { Fragment, useEffect } from 'react';
+
+// router import
 import { LinkContainer } from 'react-router-bootstrap';
+
+// boostrap import
 import { Table, Button, Row, Col } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// component import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Meta from '../components/Meta';
+
+// actions import
 import { listOrders } from '../actions/orderActions';
+
+// constants import
 import { ORDER_REQUEST } from '../constants/orderTypes';
 
 const OrderListScreen = ({ history }) => {
+  // redux
   const dispatch = useDispatch();
 
   const orderStates = useSelector((state) => state.orderStates);
@@ -25,7 +38,7 @@ const OrderListScreen = ({ history }) => {
     }
   }, [dispatch, history, userCurrent]);
 
-  const onClick = (e) => {
+  const onClick = () => {
     dispatch({ type: ORDER_REQUEST });
   };
 

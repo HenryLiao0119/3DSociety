@@ -22,8 +22,8 @@ const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // redux
   const dispatch = useDispatch();
-
   const userStates = useSelector((state) => state.userStates);
   const { userLoading, userError, userCurrent } = userStates;
 
@@ -46,6 +46,7 @@ const LoginScreen = ({ location, history }) => {
       <h1>Sign In</h1>
       {userError && <Message variant='danger'>{userError}</Message>}
       {userLoading && <Loader />}
+      {/* login */}
       <Form onSubmit={submitHandler}>
         <Form.Group ControlId='email'>
           <Form.Label>Email Address</Form.Label>
@@ -71,7 +72,7 @@ const LoginScreen = ({ location, history }) => {
           Sign In
         </Button>
       </Form>
-
+      {/* register */}
       <Row className='py-3'>
         <Col>
           New Customer?{' '}
