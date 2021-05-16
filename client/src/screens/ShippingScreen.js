@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
+
+// bootstrap import
 import { Form, Button } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// components import
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Meta from '../components/Meta';
+
+// actions import
 import { saveShippingAddress } from '../actions/cartActions';
 
 const ShippingScreen = ({ history }) => {
-  const cartStates = useSelector((state) => state.cartStates);
-  const { shippingAddress } = cartStates;
-
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.Country);
 
+  // redux
   const dispatch = useDispatch();
+
+  const cartStates = useSelector((state) => state.cartStates);
+  const { shippingAddress } = cartStates;
 
   const submitHandler = (e) => {
     e.preventDefault();

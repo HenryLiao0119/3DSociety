@@ -1,24 +1,30 @@
 import React, { Fragment, useEffect } from 'react';
+
+// bootstrap import
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
+
+// redux impport
 import { useDispatch, useSelector } from 'react-redux';
+
+// component import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Meta from '../components/Meta';
+
+// ations import
 import { listUsers, deleteUsers } from '../actions/userActions';
+
+// constant import
 import { USER_DELETE_RESET } from '../constants/userTypes';
 
 const UserListScreen = ({ history }) => {
+  // redux
   const dispatch = useDispatch();
 
   const userStates = useSelector((state) => state.userStates);
-  const {
-    userLoading,
-    userError,
-    userList,
-    userCurrent,
-    userDeleted,
-  } = userStates;
+  const { userLoading, userError, userList, userCurrent, userDeleted } =
+    userStates;
 
   useEffect(() => {
     if (userDeleted) {

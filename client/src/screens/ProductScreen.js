@@ -38,15 +38,12 @@ const ProductScreen = ({ match, history }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
+  // redux
   const dispatch = useDispatch();
 
   const productStates = useSelector((state) => state.productStates);
-  const {
-    product,
-    productError,
-    productLoading,
-    productReviewed,
-  } = productStates;
+  const { product, productError, productLoading, productReviewed } =
+    productStates;
 
   const userStates = useSelector((state) => state.userStates);
   const { userCurrent } = userStates;

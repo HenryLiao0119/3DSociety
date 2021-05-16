@@ -1,12 +1,24 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
+// router import
 import { Link } from 'react-router-dom';
+
+// bootstrap import
 import { Form, Button } from 'react-bootstrap';
+
+// redux import
 import { useDispatch, useSelector } from 'react-redux';
+
+// component import
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import Meta from '../components/Meta';
-import { getUserDetails, updateUser } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
+
+// actions import
+import { getUserDetails, updateUser } from '../actions/userActions';
+
+// constant import
 import { USER_UPDATE_RESET } from '../constants/userTypes';
 
 const UserEditScreen = ({ match, history }) => {
@@ -16,6 +28,7 @@ const UserEditScreen = ({ match, history }) => {
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // redux
   const dispatch = useDispatch();
 
   const userStates = useSelector((state) => state.userStates);

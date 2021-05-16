@@ -25,6 +25,7 @@ const RegisterScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
 
+  // redux
   const dispatch = useDispatch();
 
   const userStates = useSelector((state) => state.userStates);
