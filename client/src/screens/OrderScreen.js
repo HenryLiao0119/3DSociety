@@ -45,7 +45,6 @@ const OrderScreen = ({ match, history }) => {
   const { userCurrent } = userStates;
 
   useEffect(() => {
-    console.log('order screen useeffec');
     if (!userCurrent) {
       history.push('/login');
     }
@@ -80,7 +79,16 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, userCurrent, orderPaid, orderDelivered]);
+  }, [
+    dispatch,
+    order,
+    orderId,
+    userCurrent,
+    orderPaid,
+    orderDelivered,
+    history,
+    orderLoading,
+  ]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));

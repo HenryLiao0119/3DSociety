@@ -13,10 +13,10 @@ import Message from '../components/Message';
 import Meta from '../components/Meta';
 
 // action import
-import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
 import { ORDER_REQUEST } from '../constants/orderTypes';
-// // import { USER_UPDATE_PROFILE_RESET } from '../constants/userTypes';
+import { USER_UPDATE_RESET } from '../constants/userTypes';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -28,7 +28,7 @@ const ProfileScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const userStates = useSelector((state) => state.userStates);
-  const { loading, error, success, userCurrent } = userStates;
+  const { userLoading, userError, userUpdated, userCurrent } = userStates;
 
   const orderStates = useSelector((state) => state.orderStates);
   const { orderList, orderLoading, orderError } = orderStates;
@@ -38,15 +38,16 @@ const ProfileScreen = ({ location, history }) => {
       history.push('/login');
     } else {
       dispatch(listMyOrders());
-      if (!userCurrent.name) {
+      if (!userCurrent.name || userUpdated) {
         // dispatch(getUserDetails('profile'));
+        dispatch({ type: USER_UPDATE_RESET });
         dispatch(listMyOrders());
       } else {
         setName(userCurrent.name);
         setEmail(userCurrent.email);
       }
     }
-  }, [dispatch, history, userCurrent]);
+  }, [dispatch, history, userCurrent, userUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -69,9 +70,9 @@ const ProfileScreen = ({ location, history }) => {
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />}
+        {userError && <Message variant='danger'>{userError}</Message>}
+        {userUpdated && <Message variant='success'>Profile Updated</Message>}
+        {userLoading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group ControlId='name'>
             <Form.Label>Name</Form.Label>

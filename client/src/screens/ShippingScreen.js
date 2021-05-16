@@ -15,16 +15,16 @@ import Meta from '../components/Meta';
 import { saveShippingAddress } from '../actions/cartActions';
 
 const ShippingScreen = ({ history }) => {
-  const [address, setAddress] = useState(shippingAddress.address);
-  const [city, setCity] = useState(shippingAddress.city);
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.Country);
-
   // redux
   const dispatch = useDispatch();
 
   const cartStates = useSelector((state) => state.cartStates);
   const { shippingAddress } = cartStates;
+
+  const [address, setAddress] = useState(shippingAddress.address);
+  const [city, setCity] = useState(shippingAddress.city);
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  const [country, setCountry] = useState(shippingAddress.Country);
 
   const submitHandler = (e) => {
     e.preventDefault();
