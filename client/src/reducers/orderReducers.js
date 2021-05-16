@@ -78,6 +78,7 @@ export default (state = initialState, action) => {
         orderLoading: false,
         orderError: action.payload,
       };
+    // pay order
     case ORDER_PAY_SUCCESS:
       return {
         ...state,

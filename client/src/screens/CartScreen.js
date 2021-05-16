@@ -30,18 +30,23 @@ const CartScreen = ({ match, location, history }) => {
 
   const dispatch = useDispatch();
 
+  // states
   const cartStates = useSelector((state) => state.cartStates);
   const { cartItems } = cartStates;
 
   useEffect(() => {
+    // when page load, use product id to add to cart
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
   }, [dispatch, productId, qty]);
 
+  // remove cart item function
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   };
+
+  // checkout function
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping');
   };
