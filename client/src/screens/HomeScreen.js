@@ -16,20 +16,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
+  // grab data
   const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
 
   // redux
   const dispatch = useDispatch();
   const productStates = useSelector((state) => state.productStates);
-  const {
-    productList,
-    productLoading,
-    productError,
-    page,
-    pages,
-  } = productStates;
+  const { productList, productLoading, productError, page, pages } =
+    productStates;
 
+  // list all products
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
@@ -37,7 +34,13 @@ const HomeScreen = ({ match }) => {
   return (
     <Fragment>
       <Meta title='Home' />
-      {!keyword && <ProductCarousel />}
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
       <h1>Latest Creations</h1>
       {productLoading ? (
         <Loader />
