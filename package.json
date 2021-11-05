@@ -14,7 +14,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
-    "node": ">=12.19.0"
+    "node": "16.13.0"
   },
   "author": "Henry Liao",
   "license": "MIT",
