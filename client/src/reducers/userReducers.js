@@ -46,6 +46,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userCurrent: action.payload,
+        userError: null,
         userLoading: false,
       };
     case USER_LOGIN_FAIL:
