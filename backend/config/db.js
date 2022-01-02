@@ -7,7 +7,7 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-      useCreateIndex: true,
+      // useCreateIndex: true,
     });
 
     // shows it is connected in the terminal
