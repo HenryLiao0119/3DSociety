@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index",
     "server": "nodemon index",
-    "build": "cd client && npm install && npm run build",
+    "build": "cd .. && cd client && npm install && npm run build",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run index\" \"npm run client\"",
     "data:import": "node seeder",
