@@ -57,7 +57,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
    app.get('/', (req, res) => {
      res.send('API is running....');
    });
-// }
+}
 
 // error route need to be at the end
 app.use(notFound);
